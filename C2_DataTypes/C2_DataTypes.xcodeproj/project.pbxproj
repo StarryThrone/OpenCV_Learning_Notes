@@ -330,10 +330,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F54FC868245AAC6600016058 /* Build configuration list for PBXNativeTarget "PrintMatrixWithTemplate" */;
 			buildPhases = (
-				F54FC860245AAC6600016058 /* Sources */,
 				F54FC861245AAC6600016058 /* Frameworks */,
 				F54FC862245AAC6600016058 /* CopyFiles */,
 				F54FC875245AAC9900016058 /* Embed Libraries */,
+				F54FC860245AAC6600016058 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -552,7 +552,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = /usr/local/Cellar/opencv/4.2.0_1/include/opencv4;
+				HEADER_SEARCH_PATHS = /Users/chenjie/Desktop/GitHubRep/OpenCV3/Frameworks/Headers;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -605,7 +605,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = /usr/local/Cellar/opencv/4.2.0_1/include/opencv4;
+				HEADER_SEARCH_PATHS = /Users/chenjie/Desktop/GitHubRep/OpenCV3/Frameworks/Headers;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
