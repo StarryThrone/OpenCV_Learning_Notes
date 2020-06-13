@@ -33,6 +33,8 @@
 		F543B2362494B7EF004B20CE /* libopencv_videoio.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F5E81C432494757200040A4E /* libopencv_videoio.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F543B23F2494BA98004B20CE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F543B23E2494BA98004B20CE /* main.cpp */; };
 		F543B2452494BB4D004B20CE /* WxMoviePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F543B2432494BB4D004B20CE /* WxMoviePlayer.cpp */; };
+		F543B24D2494BD71004B20CE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F543B24C2494BD71004B20CE /* main.cpp */; };
+		F543B2532494BD86004B20CE /* COpenCVTestView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F543B2512494BD86004B20CE /* COpenCVTestView.cpp */; };
 		F5E81C322493BA2900040A4E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5E81C312493BA2900040A4E /* main.cpp */; };
 		F5E81C3E2493BC0000040A4E /* libopencv_core.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5E81C372493BAD100040A4E /* libopencv_core.4.2.0.dylib */; };
 		F5E81C3F2493BC0000040A4E /* libopencv_core.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F5E81C372493BAD100040A4E /* libopencv_core.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -152,6 +154,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		F543B2482494BD71004B20CE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		F5E81C2D2493BA2900040A4E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -254,6 +265,10 @@
 		F543B23E2494BA98004B20CE /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F543B2432494BB4D004B20CE /* WxMoviePlayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = WxMoviePlayer.cpp; sourceTree = "<group>"; };
 		F543B2442494BB4D004B20CE /* WxMoviePlayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = WxMoviePlayer.hpp; sourceTree = "<group>"; };
+		F543B24A2494BD71004B20CE /* WTL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WTL; sourceTree = BUILT_PRODUCTS_DIR; };
+		F543B24C2494BD71004B20CE /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		F543B2512494BD86004B20CE /* COpenCVTestView.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = COpenCVTestView.cpp; sourceTree = "<group>"; };
+		F543B2522494BD86004B20CE /* COpenCVTestView.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = COpenCVTestView.hpp; sourceTree = "<group>"; };
 		F5E81C2F2493BA2900040A4E /* FourCCToVideoCodec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FourCCToVideoCodec; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5E81C312493BA2900040A4E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F5E81C372493BAD100040A4E /* libopencv_core.4.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.4.2.0.dylib; path = ../Frameworks/libopencv_core.4.2.0.dylib; sourceTree = "<group>"; };
@@ -309,6 +324,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F543B2392494BA98004B20CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F543B2472494BD71004B20CE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -399,6 +421,16 @@
 			path = WXWidgets;
 			sourceTree = "<group>";
 		};
+		F543B24B2494BD71004B20CE /* WTL */ = {
+			isa = PBXGroup;
+			children = (
+				F543B24C2494BD71004B20CE /* main.cpp */,
+				F543B2512494BD86004B20CE /* COpenCVTestView.cpp */,
+				F543B2522494BD86004B20CE /* COpenCVTestView.hpp */,
+			);
+			path = WTL;
+			sourceTree = "<group>";
+		};
 		F5E81C182493B98F00040A4E = {
 			isa = PBXGroup;
 			children = (
@@ -411,6 +443,7 @@
 				F543B21A2494B2E2004B20CE /* Cube */,
 				F543B22A2494B6D1004B20CE /* Qt */,
 				F543B23D2494BA98004B20CE /* WXWidgets */,
+				F543B24B2494BD71004B20CE /* WTL */,
 				F5E81C222493B98F00040A4E /* Products */,
 				F5E81C362493BAD100040A4E /* Frameworks */,
 			);
@@ -428,6 +461,7 @@
 				F543B2192494B2E2004B20CE /* Cube */,
 				F543B2292494B6D1004B20CE /* Qt */,
 				F543B23C2494BA98004B20CE /* WXWidgets */,
+				F543B24A2494BD71004B20CE /* WTL */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -568,6 +602,23 @@
 			productReference = F543B23C2494BA98004B20CE /* WXWidgets */;
 			productType = "com.apple.product-type.tool";
 		};
+		F543B2492494BD71004B20CE /* WTL */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F543B24E2494BD71004B20CE /* Build configuration list for PBXNativeTarget "WTL" */;
+			buildPhases = (
+				F543B2462494BD71004B20CE /* Sources */,
+				F543B2472494BD71004B20CE /* Frameworks */,
+				F543B2482494BD71004B20CE /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WTL;
+			productName = WTL;
+			productReference = F543B24A2494BD71004B20CE /* WTL */;
+			productType = "com.apple.product-type.tool";
+		};
 		F5E81C2E2493BA2900040A4E /* FourCCToVideoCodec */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F5E81C332493BA2900040A4E /* Build configuration list for PBXNativeTarget "FourCCToVideoCodec" */;
@@ -664,6 +715,9 @@
 					F543B23B2494BA98004B20CE = {
 						CreatedOnToolsVersion = 11.5;
 					};
+					F543B2492494BD71004B20CE = {
+						CreatedOnToolsVersion = 11.5;
+					};
 					F5E81C2E2493BA2900040A4E = {
 						CreatedOnToolsVersion = 11.5;
 					};
@@ -700,6 +754,7 @@
 				F543B2182494B2E2004B20CE /* Cube */,
 				F543B2282494B6D1004B20CE /* Qt */,
 				F543B23B2494BA98004B20CE /* WXWidgets */,
+				F543B2492494BD71004B20CE /* WTL */,
 			);
 		};
 /* End PBXProject section */
@@ -744,6 +799,15 @@
 			files = (
 				F543B2452494BB4D004B20CE /* WxMoviePlayer.cpp in Sources */,
 				F543B23F2494BA98004B20CE /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F543B2462494BD71004B20CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F543B24D2494BD71004B20CE /* main.cpp in Sources */,
+				F543B2532494BD86004B20CE /* COpenCVTestView.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -875,6 +939,26 @@
 			name = Debug;
 		};
 		F543B2422494BA98004B20CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HABU2A8ZM2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F543B24F2494BD71004B20CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HABU2A8ZM2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F543B2502494BD71004B20CE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1119,6 +1203,15 @@
 			buildConfigurations = (
 				F543B2412494BA98004B20CE /* Debug */,
 				F543B2422494BA98004B20CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F543B24E2494BD71004B20CE /* Build configuration list for PBXNativeTarget "WTL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F543B24F2494BD71004B20CE /* Debug */,
+				F543B2502494BD71004B20CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
