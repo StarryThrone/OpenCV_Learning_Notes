@@ -17,6 +17,9 @@
 		F5E81C4D249476B400040A4E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5E81C4C249476B400040A4E /* main.cpp */; };
 		F5E81C512494774900040A4E /* libopencv_core.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5E81C372493BAD100040A4E /* libopencv_core.4.2.0.dylib */; };
 		F5E81C522494774900040A4E /* libopencv_core.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F5E81C372493BAD100040A4E /* libopencv_core.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F5E81C5B24947C8200040A4E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5E81C5A24947C8200040A4E /* main.cpp */; };
+		F5E81C5F24947C9300040A4E /* libopencv_core.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5E81C372493BAD100040A4E /* libopencv_core.4.2.0.dylib */; };
+		F5E81C6024947C9300040A4E /* libopencv_core.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F5E81C372493BAD100040A4E /* libopencv_core.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,6 +65,26 @@
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F5E81C5624947C8200040A4E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		F5E81C6124947C9300040A4E /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F5E81C6024947C9300040A4E /* libopencv_core.4.2.0.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +95,8 @@
 		F5E81C432494757200040A4E /* libopencv_videoio.4.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videoio.4.2.0.dylib; path = ../Frameworks/libopencv_videoio.4.2.0.dylib; sourceTree = "<group>"; };
 		F5E81C4A249476B400040A4E /* WriteYML */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WriteYML; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5E81C4C249476B400040A4E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		F5E81C5824947C8200040A4E /* ReadYML */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ReadYML; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5E81C5A24947C8200040A4E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +118,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F5E81C5524947C8200040A4E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5E81C5F24947C9300040A4E /* libopencv_core.4.2.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -101,6 +134,7 @@
 			children = (
 				F5E81C302493BA2900040A4E /* FourCCToVideoCodec */,
 				F5E81C4B249476B400040A4E /* WriteYML */,
+				F5E81C5924947C8200040A4E /* ReadYML */,
 				F5E81C222493B98F00040A4E /* Products */,
 				F5E81C362493BAD100040A4E /* Frameworks */,
 			);
@@ -111,6 +145,7 @@
 			children = (
 				F5E81C2F2493BA2900040A4E /* FourCCToVideoCodec */,
 				F5E81C4A249476B400040A4E /* WriteYML */,
+				F5E81C5824947C8200040A4E /* ReadYML */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -139,6 +174,14 @@
 				F5E81C4C249476B400040A4E /* main.cpp */,
 			);
 			path = WriteYML;
+			sourceTree = "<group>";
+		};
+		F5E81C5924947C8200040A4E /* ReadYML */ = {
+			isa = PBXGroup;
+			children = (
+				F5E81C5A24947C8200040A4E /* main.cpp */,
+			);
+			path = ReadYML;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +223,24 @@
 			productReference = F5E81C4A249476B400040A4E /* WriteYML */;
 			productType = "com.apple.product-type.tool";
 		};
+		F5E81C5724947C8200040A4E /* ReadYML */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F5E81C5C24947C8200040A4E /* Build configuration list for PBXNativeTarget "ReadYML" */;
+			buildPhases = (
+				F5E81C5424947C8200040A4E /* Sources */,
+				F5E81C5524947C8200040A4E /* Frameworks */,
+				F5E81C5624947C8200040A4E /* CopyFiles */,
+				F5E81C6124947C9300040A4E /* Embed Libraries */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReadYML;
+			productName = ReadYML;
+			productReference = F5E81C5824947C8200040A4E /* ReadYML */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -193,6 +254,9 @@
 						CreatedOnToolsVersion = 11.5;
 					};
 					F5E81C49249476B400040A4E = {
+						CreatedOnToolsVersion = 11.5;
+					};
+					F5E81C5724947C8200040A4E = {
 						CreatedOnToolsVersion = 11.5;
 					};
 				};
@@ -212,6 +276,7 @@
 			targets = (
 				F5E81C2E2493BA2900040A4E /* FourCCToVideoCodec */,
 				F5E81C49249476B400040A4E /* WriteYML */,
+				F5E81C5724947C8200040A4E /* ReadYML */,
 			);
 		};
 /* End PBXProject section */
@@ -230,6 +295,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5E81C4D249476B400040A4E /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5E81C5424947C8200040A4E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5E81C5B24947C8200040A4E /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +460,26 @@
 			};
 			name = Release;
 		};
+		F5E81C5D24947C8200040A4E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HABU2A8ZM2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F5E81C5E24947C8200040A4E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HABU2A8ZM2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -413,6 +506,15 @@
 			buildConfigurations = (
 				F5E81C4F249476B400040A4E /* Debug */,
 				F5E81C50249476B400040A4E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F5E81C5C24947C8200040A4E /* Build configuration list for PBXNativeTarget "ReadYML" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5E81C5D24947C8200040A4E /* Debug */,
+				F5E81C5E24947C8200040A4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
