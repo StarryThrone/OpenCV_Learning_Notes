@@ -14,6 +14,12 @@
 		F543B2012494A708004B20CE /* libopencv_highgui.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F5E81C382493BAD100040A4E /* libopencv_highgui.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F543B2022494A75A004B20CE /* libopencv_imgproc.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5E81C732494984500040A4E /* libopencv_imgproc.4.2.0.dylib */; };
 		F543B2032494A75A004B20CE /* libopencv_imgproc.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F5E81C732494984500040A4E /* libopencv_imgproc.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F543B20B2494AE6C004B20CE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F543B20A2494AE6C004B20CE /* main.cpp */; };
+		F543B20F2494B00E004B20CE /* libopencv_core.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5E81C372493BAD100040A4E /* libopencv_core.4.2.0.dylib */; };
+		F543B2102494B00E004B20CE /* libopencv_core.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F5E81C372493BAD100040A4E /* libopencv_core.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F543B2112494B00E004B20CE /* libopencv_videoio.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5E81C432494757200040A4E /* libopencv_videoio.4.2.0.dylib */; };
+		F543B2122494B00E004B20CE /* libopencv_videoio.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F5E81C432494757200040A4E /* libopencv_videoio.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F543B2142494B0B7004B20CE /* libopencv_highgui.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5E81C382493BAD100040A4E /* libopencv_highgui.4.2.0.dylib */; };
 		F5E81C322493BA2900040A4E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5E81C312493BA2900040A4E /* main.cpp */; };
 		F5E81C3E2493BC0000040A4E /* libopencv_core.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5E81C372493BAD100040A4E /* libopencv_core.4.2.0.dylib */; };
 		F5E81C3F2493BC0000040A4E /* libopencv_core.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F5E81C372493BAD100040A4E /* libopencv_core.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -57,6 +63,27 @@
 				F543B1FE2494A684004B20CE /* libopencv_core.4.2.0.dylib in Embed Libraries */,
 				F543B2012494A708004B20CE /* libopencv_highgui.4.2.0.dylib in Embed Libraries */,
 				F543B2032494A75A004B20CE /* libopencv_imgproc.4.2.0.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F543B2062494AE6C004B20CE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		F543B2132494B00F004B20CE /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F543B2102494B00E004B20CE /* libopencv_core.4.2.0.dylib in Embed Libraries */,
+				F543B2122494B00E004B20CE /* libopencv_videoio.4.2.0.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,6 +178,8 @@
 /* Begin PBXFileReference section */
 		F543B1F624949B2A004B20CE /* DrawBoxes */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DrawBoxes; sourceTree = BUILT_PRODUCTS_DIR; };
 		F543B1F824949B2A004B20CE /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		F543B2082494AE6C004B20CE /* Trackbar */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Trackbar; sourceTree = BUILT_PRODUCTS_DIR; };
+		F543B20A2494AE6C004B20CE /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F5E81C2F2493BA2900040A4E /* FourCCToVideoCodec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FourCCToVideoCodec; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5E81C312493BA2900040A4E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F5E81C372493BAD100040A4E /* libopencv_core.4.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.4.2.0.dylib; path = ../Frameworks/libopencv_core.4.2.0.dylib; sourceTree = "<group>"; };
@@ -174,6 +203,16 @@
 				F543B1FD2494A684004B20CE /* libopencv_core.4.2.0.dylib in Frameworks */,
 				F543B2002494A708004B20CE /* libopencv_highgui.4.2.0.dylib in Frameworks */,
 				F543B2022494A75A004B20CE /* libopencv_imgproc.4.2.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F543B2052494AE6C004B20CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F543B2142494B0B7004B20CE /* libopencv_highgui.4.2.0.dylib in Frameworks */,
+				F543B20F2494B00E004B20CE /* libopencv_core.4.2.0.dylib in Frameworks */,
+				F543B2112494B00E004B20CE /* libopencv_videoio.4.2.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +264,14 @@
 			path = DrawBoxes;
 			sourceTree = "<group>";
 		};
+		F543B2092494AE6C004B20CE /* Trackbar */ = {
+			isa = PBXGroup;
+			children = (
+				F543B20A2494AE6C004B20CE /* main.cpp */,
+			);
+			path = Trackbar;
+			sourceTree = "<group>";
+		};
 		F5E81C182493B98F00040A4E = {
 			isa = PBXGroup;
 			children = (
@@ -233,6 +280,7 @@
 				F5E81C5924947C8200040A4E /* ReadYML */,
 				F5E81C672494966300040A4E /* DisplayImage */,
 				F543B1F724949B2A004B20CE /* DrawBoxes */,
+				F543B2092494AE6C004B20CE /* Trackbar */,
 				F5E81C222493B98F00040A4E /* Products */,
 				F5E81C362493BAD100040A4E /* Frameworks */,
 			);
@@ -246,6 +294,7 @@
 				F5E81C5824947C8200040A4E /* ReadYML */,
 				F5E81C662494966300040A4E /* DisplayImage */,
 				F543B1F624949B2A004B20CE /* DrawBoxes */,
+				F543B2082494AE6C004B20CE /* Trackbar */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -313,6 +362,24 @@
 			name = DrawBoxes;
 			productName = DrawBoxes;
 			productReference = F543B1F624949B2A004B20CE /* DrawBoxes */;
+			productType = "com.apple.product-type.tool";
+		};
+		F543B2072494AE6C004B20CE /* Trackbar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F543B20C2494AE6C004B20CE /* Build configuration list for PBXNativeTarget "Trackbar" */;
+			buildPhases = (
+				F543B2132494B00F004B20CE /* Embed Libraries */,
+				F543B2042494AE6C004B20CE /* Sources */,
+				F543B2052494AE6C004B20CE /* Frameworks */,
+				F543B2062494AE6C004B20CE /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Trackbar;
+			productName = Trackbar;
+			productReference = F543B2082494AE6C004B20CE /* Trackbar */;
 			productType = "com.apple.product-type.tool";
 		};
 		F5E81C2E2493BA2900040A4E /* FourCCToVideoCodec */ = {
@@ -399,6 +466,9 @@
 					F543B1F524949B2A004B20CE = {
 						CreatedOnToolsVersion = 11.5;
 					};
+					F543B2072494AE6C004B20CE = {
+						CreatedOnToolsVersion = 11.5;
+					};
 					F5E81C2E2493BA2900040A4E = {
 						CreatedOnToolsVersion = 11.5;
 					};
@@ -431,6 +501,7 @@
 				F5E81C5724947C8200040A4E /* ReadYML */,
 				F5E81C652494966300040A4E /* DisplayImage */,
 				F543B1F524949B2A004B20CE /* DrawBoxes */,
+				F543B2072494AE6C004B20CE /* Trackbar */,
 			);
 		};
 /* End PBXProject section */
@@ -441,6 +512,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F543B1F924949B2A004B20CE /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F543B2042494AE6C004B20CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F543B20B2494AE6C004B20CE /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +569,26 @@
 			name = Debug;
 		};
 		F543B1FB24949B2A004B20CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HABU2A8ZM2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F543B20D2494AE6C004B20CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HABU2A8ZM2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F543B20E2494AE6C004B20CE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -698,6 +797,15 @@
 			buildConfigurations = (
 				F543B1FA24949B2A004B20CE /* Debug */,
 				F543B1FB24949B2A004B20CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F543B20C2494AE6C004B20CE /* Build configuration list for PBXNativeTarget "Trackbar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F543B20D2494AE6C004B20CE /* Debug */,
+				F543B20E2494AE6C004B20CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
