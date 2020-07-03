@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F52B0CED24AF0D2700BCF934 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F52B0CEC24AF0D2700BCF934 /* main.cpp */; };
+		F52B0CF124AF0D8B00BCF934 /* libopencv_core.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F2FD0924A3896400219887 /* libopencv_core.4.2.0.dylib */; };
+		F52B0CF224AF0D8B00BCF934 /* libopencv_core.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F5F2FD0924A3896400219887 /* libopencv_core.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F52B0CF324AF0D8B00BCF934 /* libopencv_highgui.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F2FD0D24A3897300219887 /* libopencv_highgui.4.2.0.dylib */; };
+		F52B0CF424AF0D8B00BCF934 /* libopencv_highgui.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F5F2FD0D24A3897300219887 /* libopencv_highgui.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F52B0CF524AF0D8B00BCF934 /* libopencv_imgcodecs.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F2FD0E24A3897300219887 /* libopencv_imgcodecs.4.2.0.dylib */; };
+		F52B0CF624AF0D8B00BCF934 /* libopencv_imgcodecs.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F5F2FD0E24A3897300219887 /* libopencv_imgcodecs.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F52B0CF724AF0D8B00BCF934 /* libopencv_imgproc.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F2FD0F24A3897300219887 /* libopencv_imgproc.4.2.0.dylib */; };
+		F52B0CF824AF0D8B00BCF934 /* libopencv_imgproc.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F5F2FD0F24A3897300219887 /* libopencv_imgproc.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F5F2FD0424A3889500219887 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5F2FD0324A3889500219887 /* main.cpp */; };
 		F5F2FD0A24A3896400219887 /* libopencv_core.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F2FD0924A3896400219887 /* libopencv_core.4.2.0.dylib */; };
 		F5F2FD0B24A3896400219887 /* libopencv_core.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F5F2FD0924A3896400219887 /* libopencv_core.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -28,6 +37,29 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		F52B0CE824AF0D2700BCF934 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		F52B0CF924AF0D8B00BCF934 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F52B0CF224AF0D8B00BCF934 /* libopencv_core.4.2.0.dylib in Embed Libraries */,
+				F52B0CF824AF0D8B00BCF934 /* libopencv_imgproc.4.2.0.dylib in Embed Libraries */,
+				F52B0CF424AF0D8B00BCF934 /* libopencv_highgui.4.2.0.dylib in Embed Libraries */,
+				F52B0CF624AF0D8B00BCF934 /* libopencv_imgcodecs.4.2.0.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F5F2FCFF24A3889500219887 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -77,6 +109,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F52B0CEA24AF0D2700BCF934 /* LogPolor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LogPolor; sourceTree = BUILT_PRODUCTS_DIR; };
+		F52B0CEC24AF0D2700BCF934 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F5F2FD0124A3889500219887 /* AffineTransform */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AffineTransform; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5F2FD0324A3889500219887 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F5F2FD0924A3896400219887 /* libopencv_core.4.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.4.2.0.dylib; path = ../Frameworks/libopencv_core.4.2.0.dylib; sourceTree = "<group>"; };
@@ -88,6 +122,17 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F52B0CE724AF0D2700BCF934 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F52B0CF124AF0D8B00BCF934 /* libopencv_core.4.2.0.dylib in Frameworks */,
+				F52B0CF724AF0D8B00BCF934 /* libopencv_imgproc.4.2.0.dylib in Frameworks */,
+				F52B0CF324AF0D8B00BCF934 /* libopencv_highgui.4.2.0.dylib in Frameworks */,
+				F52B0CF524AF0D8B00BCF934 /* libopencv_imgcodecs.4.2.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F5F2FCFE24A3889500219887 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -113,11 +158,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F52B0CEB24AF0D2700BCF934 /* LogPolor */ = {
+			isa = PBXGroup;
+			children = (
+				F52B0CEC24AF0D2700BCF934 /* main.cpp */,
+			);
+			path = LogPolor;
+			sourceTree = "<group>";
+		};
 		F5F2FCEA24A37D8E00219887 = {
 			isa = PBXGroup;
 			children = (
 				F5F2FD0224A3889500219887 /* AffineTransform */,
 				F5F2FD1B24A441B700219887 /* PerspectiveTransform */,
+				F52B0CEB24AF0D2700BCF934 /* LogPolor */,
 				F5F2FCF424A37D8F00219887 /* Products */,
 				F5F2FD0824A3896300219887 /* Frameworks */,
 			);
@@ -128,6 +182,7 @@
 			children = (
 				F5F2FD0124A3889500219887 /* AffineTransform */,
 				F5F2FD1A24A441B700219887 /* PerspectiveTransform */,
+				F52B0CEA24AF0D2700BCF934 /* LogPolor */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,6 +217,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		F52B0CE924AF0D2700BCF934 /* LogPolor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F52B0CF024AF0D2700BCF934 /* Build configuration list for PBXNativeTarget "LogPolor" */;
+			buildPhases = (
+				F52B0CF924AF0D8B00BCF934 /* Embed Libraries */,
+				F52B0CE624AF0D2700BCF934 /* Sources */,
+				F52B0CE724AF0D2700BCF934 /* Frameworks */,
+				F52B0CE824AF0D2700BCF934 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LogPolor;
+			productName = LogPolor;
+			productReference = F52B0CEA24AF0D2700BCF934 /* LogPolor */;
+			productType = "com.apple.product-type.tool";
+		};
 		F5F2FD0024A3889500219887 /* AffineTransform */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F5F2FD0524A3889500219887 /* Build configuration list for PBXNativeTarget "AffineTransform" */;
@@ -207,6 +280,9 @@
 				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = chenjie;
 				TargetAttributes = {
+					F52B0CE924AF0D2700BCF934 = {
+						CreatedOnToolsVersion = 11.5;
+					};
 					F5F2FD0024A3889500219887 = {
 						CreatedOnToolsVersion = 11.5;
 					};
@@ -230,11 +306,20 @@
 			targets = (
 				F5F2FD0024A3889500219887 /* AffineTransform */,
 				F5F2FD1924A441B700219887 /* PerspectiveTransform */,
+				F52B0CE924AF0D2700BCF934 /* LogPolor */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F52B0CE624AF0D2700BCF934 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F52B0CED24AF0D2700BCF934 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F5F2FCFD24A3889500219887 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -254,6 +339,26 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		F52B0CEE24AF0D2700BCF934 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HABU2A8ZM2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F52B0CEF24AF0D2700BCF934 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HABU2A8ZM2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		F5F2FCF824A37D8F00219887 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -408,6 +513,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F52B0CF024AF0D2700BCF934 /* Build configuration list for PBXNativeTarget "LogPolor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F52B0CEE24AF0D2700BCF934 /* Debug */,
+				F52B0CEF24AF0D2700BCF934 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F5F2FCEE24A37D8E00219887 /* Build configuration list for PBXProject "C7_GeneralImageTransform" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
