@@ -15,6 +15,15 @@
 		F558FBDA24C6CFE900100E61 /* libopencv_highgui.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F558FBD324C6CFE800100E61 /* libopencv_highgui.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F558FBDB24C6CFE900100E61 /* libopencv_imgproc.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F558FBD424C6CFE800100E61 /* libopencv_imgproc.4.2.0.dylib */; };
 		F558FBDC24C6CFE900100E61 /* libopencv_imgproc.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F558FBD424C6CFE800100E61 /* libopencv_imgproc.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F558FBF924C6FEF100100E61 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F558FBF824C6FEF100100E61 /* main.cpp */; };
+		F558FC0F24C71E2D00100E61 /* libopencv_core.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F558FBD124C6CFE800100E61 /* libopencv_core.4.2.0.dylib */; };
+		F558FC1024C71E2D00100E61 /* libopencv_core.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F558FBD124C6CFE800100E61 /* libopencv_core.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F558FC1124C71E2D00100E61 /* libopencv_highgui.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F558FBD324C6CFE800100E61 /* libopencv_highgui.4.2.0.dylib */; };
+		F558FC1224C71E2D00100E61 /* libopencv_highgui.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F558FBD324C6CFE800100E61 /* libopencv_highgui.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F558FC1324C71E2D00100E61 /* libopencv_imgcodecs.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F558FBD224C6CFE800100E61 /* libopencv_imgcodecs.4.2.0.dylib */; };
+		F558FC1424C71E2D00100E61 /* libopencv_imgcodecs.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F558FBD224C6CFE800100E61 /* libopencv_imgcodecs.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F558FC1524C71E2D00100E61 /* libopencv_imgproc.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F558FBD424C6CFE800100E61 /* libopencv_imgproc.4.2.0.dylib */; };
+		F558FC1624C71E2D00100E61 /* libopencv_imgproc.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F558FBD424C6CFE800100E61 /* libopencv_imgproc.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F5D7531C24C1893D003CACEF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5D7531B24C1893D003CACEF /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +38,29 @@
 				F558FBDC24C6CFE900100E61 /* libopencv_imgproc.4.2.0.dylib in Embed Libraries */,
 				F558FBD824C6CFE900100E61 /* libopencv_imgcodecs.4.2.0.dylib in Embed Libraries */,
 				F558FBD624C6CFE800100E61 /* libopencv_core.4.2.0.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F558FBF424C6FEF000100E61 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		F558FC1724C71E2D00100E61 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F558FC1024C71E2D00100E61 /* libopencv_core.4.2.0.dylib in Embed Libraries */,
+				F558FC1624C71E2D00100E61 /* libopencv_imgproc.4.2.0.dylib in Embed Libraries */,
+				F558FC1224C71E2D00100E61 /* libopencv_highgui.4.2.0.dylib in Embed Libraries */,
+				F558FC1424C71E2D00100E61 /* libopencv_imgcodecs.4.2.0.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -49,11 +81,24 @@
 		F558FBD224C6CFE800100E61 /* libopencv_imgcodecs.4.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgcodecs.4.2.0.dylib; path = ../Frameworks/libopencv_imgcodecs.4.2.0.dylib; sourceTree = "<group>"; };
 		F558FBD324C6CFE800100E61 /* libopencv_highgui.4.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_highgui.4.2.0.dylib; path = ../Frameworks/libopencv_highgui.4.2.0.dylib; sourceTree = "<group>"; };
 		F558FBD424C6CFE800100E61 /* libopencv_imgproc.4.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.4.2.0.dylib; path = ../Frameworks/libopencv_imgproc.4.2.0.dylib; sourceTree = "<group>"; };
+		F558FBF624C6FEF000100E61 /* ContourPer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ContourPer; sourceTree = BUILT_PRODUCTS_DIR; };
+		F558FBF824C6FEF100100E61 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F5D7531924C1893D003CACEF /* TrackBarContour */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TrackBarContour; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D7531B24C1893D003CACEF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F558FBF324C6FEF000100E61 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F558FC0F24C71E2D00100E61 /* libopencv_core.4.2.0.dylib in Frameworks */,
+				F558FC1524C71E2D00100E61 /* libopencv_imgproc.4.2.0.dylib in Frameworks */,
+				F558FC1124C71E2D00100E61 /* libopencv_highgui.4.2.0.dylib in Frameworks */,
+				F558FC1324C71E2D00100E61 /* libopencv_imgcodecs.4.2.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F5D7531624C1893D003CACEF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -79,10 +124,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F558FBF724C6FEF100100E61 /* ContourPer */ = {
+			isa = PBXGroup;
+			children = (
+				F558FBF824C6FEF100100E61 /* main.cpp */,
+			);
+			path = ContourPer;
+			sourceTree = "<group>";
+		};
 		F5D7530224C188F5003CACEF = {
 			isa = PBXGroup;
 			children = (
 				F5D7531A24C1893D003CACEF /* TrackBarContour */,
+				F558FBF724C6FEF100100E61 /* ContourPer */,
 				F5D7530C24C188F5003CACEF /* Products */,
 				F558FBD024C6CFE800100E61 /* Frameworks */,
 			);
@@ -92,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				F5D7531924C1893D003CACEF /* TrackBarContour */,
+				F558FBF624C6FEF000100E61 /* ContourPer */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,6 +162,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		F558FBF524C6FEF000100E61 /* ContourPer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F558FBFA24C6FEF100100E61 /* Build configuration list for PBXNativeTarget "ContourPer" */;
+			buildPhases = (
+				F558FC1724C71E2D00100E61 /* Embed Libraries */,
+				F558FBF224C6FEF000100E61 /* Sources */,
+				F558FBF324C6FEF000100E61 /* Frameworks */,
+				F558FBF424C6FEF000100E61 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ContourPer;
+			productName = ContourPer;
+			productReference = F558FBF624C6FEF000100E61 /* ContourPer */;
+			productType = "com.apple.product-type.tool";
+		};
 		F5D7531824C1893D003CACEF /* TrackBarContour */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F5D7531D24C1893D003CACEF /* Build configuration list for PBXNativeTarget "TrackBarContour" */;
@@ -134,6 +207,9 @@
 				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = chenjie;
 				TargetAttributes = {
+					F558FBF524C6FEF000100E61 = {
+						CreatedOnToolsVersion = 11.5;
+					};
 					F5D7531824C1893D003CACEF = {
 						CreatedOnToolsVersion = 11.5;
 					};
@@ -153,11 +229,20 @@
 			projectRoot = "";
 			targets = (
 				F5D7531824C1893D003CACEF /* TrackBarContour */,
+				F558FBF524C6FEF000100E61 /* ContourPer */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F558FBF224C6FEF000100E61 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F558FBF924C6FEF100100E61 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F5D7531524C1893D003CACEF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -169,6 +254,26 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		F558FBFB24C6FEF100100E61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HABU2A8ZM2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F558FBFC24C6FEF100100E61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HABU2A8ZM2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		F5D7531024C188F5003CACEF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -220,6 +325,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = /Users/chenjie/Desktop/GitHubRep/OpenCV3/Frameworks/Headers;
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -273,6 +379,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = /Users/chenjie/Desktop/GitHubRep/OpenCV3/Frameworks/Headers;
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -303,6 +410,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F558FBFA24C6FEF100100E61 /* Build configuration list for PBXNativeTarget "ContourPer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F558FBFB24C6FEF100100E61 /* Debug */,
+				F558FBFC24C6FEF100100E61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F5D7530624C188F5003CACEF /* Build configuration list for PBXProject "C10_Contours" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
