@@ -235,8 +235,3 @@ int main(int argc, const char * argv[]) {
 
     return 0;
 }
-
-
-//#include <opencv2/opencv.hpp>
-//#include <cstdlib>
-//#include <fstream>
