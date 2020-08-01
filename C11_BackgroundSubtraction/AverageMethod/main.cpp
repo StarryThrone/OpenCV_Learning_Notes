@@ -13,7 +13,7 @@
 // Global storage
 // Float, 3-channel images needed by learning model.
 cv::Mat previousFrame;
-cv::Mat averageFrame, differenceFrame;
+cv::Mat totalFrame, averageFrame, totalDifferenceFrame, averageDifferenceFrame;
 cv::Mat upperLimitFrame, lowerLimitFrame;
 cv::Mat forgroundFrame;
 cv::Mat tmpFrame, tmpFrame2;
@@ -41,9 +41,9 @@ void accumulateBackground(cv::Mat & backgroundFrame) {
     backgroundFrame.convertTo(tmpFrame, CV_32F);
     if (!first) {
         // 因为需要计算差分，因此首帧不处理
-        averageFrame += tmpFrame;
+        totalFrame += tmpFrame;
         cv::absdiff(tmpFrame, previousFrame, tmpFrame2);
-        differenceFrame += tmpFrame2;
+        totalDifferenceFrame += tmpFrame2;
         learnedImageCount += 1.0;
     }
     first = 0;
@@ -51,21 +51,21 @@ void accumulateBackground(cv::Mat & backgroundFrame) {
 }
 
 void updateHighThreshold(float scale) {
-    upperLimitFrame = averageFrame + (differenceFrame * scale);
+    upperLimitFrame = averageFrame + (averageDifferenceFrame * scale);
     cv::split(upperLimitFrame, channelHighFrames);
 }
 
 void updateLowThreshold(float scale) {
-    lowerLimitFrame = averageFrame - (differenceFrame * scale);
+    lowerLimitFrame = averageFrame - (averageDifferenceFrame * scale);
     cv::split(lowerLimitFrame, channelLowFrames);
 }
 
 void createModelsfromStats() {
-    averageFrame *= (1.0 / learnedImageCount);
-    differenceFrame *= (1.0 / learnedImageCount);
+    averageFrame = totalFrame * (1.0 / learnedImageCount);
+    averageDifferenceFrame = totalDifferenceFrame * (1.0 / learnedImageCount);
     
     // Make sure diff is always something
-    differenceFrame += cv::Scalar(1.0, 1.0, 1.0);
+    averageDifferenceFrame += cv::Scalar(1.0, 1.0, 1.0);
     updateHighThreshold(highThreshFactor);
     updateLowThreshold(lowThreshFactor);
 }
@@ -127,8 +127,10 @@ void adjustThresholds(const char * argv[], cv::Mat &img) {
 }
 
 void AllocateImages(const cv::Size & size) {
+    totalFrame = cv::Mat::zeros(size, CV_32FC3);
     averageFrame = cv::Mat::zeros(size, CV_32FC3);
-    differenceFrame = cv::Mat::zeros(size, CV_32FC3);
+    totalDifferenceFrame = cv::Mat::zeros(size, CV_32FC3);
+    averageDifferenceFrame = cv::Mat::zeros(size, CV_32FC3);
     previousFrame = cv::Mat::zeros(size, CV_32FC3);
     upperLimitFrame = cv::Mat::zeros(size, CV_32FC3);
     lowerLimitFrame = cv::Mat::zeros(size, CV_32FC3);
