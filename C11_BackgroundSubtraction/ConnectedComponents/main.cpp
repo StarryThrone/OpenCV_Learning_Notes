@@ -1,8 +1,8 @@
 //
 //  main.cpp
-//  CodeBook
+//  ConnectedComponents
 //
-//  Created by chenjie on 2020/9/4.
+//  Created by chenjie on 2020/9/10.
 //  Copyright © 2020 chenjie. All rights reserved.
 //
 
@@ -14,6 +14,13 @@
 
 
 
+
+// How many iterations of erosion and/or dilation there should be
+#define CVCLOSE_ITR 1
+// polygons will be simplified using DP algorithm with 'epsilon' a fixed
+// fraction of the polygon's length. This number is that divisor.
+// 控制前景对象提取得到的轮廓被确认为前景对象的长度阈值，其值等于（图像的行+列）/DP_EPSILON_DENOMINATOR
+#define DP_EPSILON_DENOMINATOR 20.0
 //Always 3 because yuv
 #define CHANNELS 3
 // IF pixel is within this bound outside of codebook, learn it, else form new code
@@ -23,6 +30,82 @@ int cbBounds[CHANNELS];
 int minMod[CHANNELS];
 // If pixel is high than a codebook by this amount, it's matched
 int maxMod[CHANNELS];
+
+
+/// 寻找联通分量
+/// @param mask Is a grayscale (8-bit depth) "raw" mask image that will be cleaned up
+/// @param poly1_hull0 If set, approximate connected component by (DEFAULT: 1) polygon, or else convex hull (0)
+/// @param perimScale Len = (width+height)/perimScale. If contour len < this, delete that contour (DEFAULT: 4)
+/// @param bbs Ref to bounding box rectangle return vector
+/// @param centers Ref to contour centers return vector
+void findConnectedComponents(cv::Mat& mask, int poly1_hull0, float perimScale, std::vector<cv::Rect>& bbs, std::vector<cv::Point>& centers) {
+    bbs.clear();
+    centers.clear();
+    
+    // 1 使用基础形态学操作去除噪点
+    // CLEAN UP RAW MASK
+    cv::morphologyEx(mask, mask, cv::MORPH_OPEN, cv::Mat(), cv::Point(-1,-1), CVCLOSE_ITR);
+    cv::morphologyEx(mask, mask, cv::MORPH_CLOSE, cv::Mat(), cv::Point(-1,-1), CVCLOSE_ITR);
+
+    
+    // 2 提取高于阈值点有效轮廓，并根据参数设置使用DP法或者轮廓突包法计算近似多边形，减少算法复杂度
+    // FIND CONTOURS AROUND ONLY BIGGER REGIONS
+    // all contours found
+    std::vector<std::vector<cv::Point>> contours_all;
+    std::vector<std::vector<cv::Point>> contours;
+
+    // just the ones we want to keep
+    cv::findContours(mask, contours_all, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
+
+    std::vector<std::vector<cv::Point>>::iterator call_i = contours_all.begin();
+    for (; call_i != contours_all.end(); ++call_i) {
+        // length of this contour
+        int len = cv::arcLength(*call_i, true);
+        
+        // length threshold a fraction of image perimeter
+        double q = (mask.rows + mask.cols) / DP_EPSILON_DENOMINATOR;
+        // If the contour is long enough to keep...
+        if (len >= q) {
+            std::vector<cv::Point> c_new;
+            if (poly1_hull0) {
+                // If the caller wants results as reduced polygons...
+                cv::approxPolyDP(*call_i, c_new, len/200.0, true);
+            } else {
+                // Convex Hull of the segmentation
+                cv::convexHull(*call_i, c_new);
+            }
+            contours.push_back(c_new);
+        }
+    }
+
+    // Just some convenience variables
+    const cv::Scalar CVX_WHITE(0xff, 0xff, 0xff);
+    const cv::Scalar CVX_BLACK(0x00, 0x00, 0x00);
+    
+    // 3 计算有效轮廓的几何中心以及包裹矩形
+    // CALC CENTER OF MASS AND/OR BOUNDING RECTANGLES
+    int idx = 0;
+    cv::Moments moments;
+    cv::Mat scratch = mask.clone();
+    std::vector<std::vector<cv::Point>>::iterator c_i = contours.begin();
+    for (; c_i != contours.end(); c_i++, idx++) {
+        cv::drawContours(scratch, contours, idx, CVX_WHITE, cv::FILLED);
+        
+        // Find the center of each contour
+        moments = cv::moments(scratch, true);
+        cv::Point p;
+        p.x = (int)(moments.m10 / moments.m00);
+        p.y = (int)(moments.m01 / moments.m00);
+        centers.push_back(p);
+        bbs.push_back(cv::boundingRect(*c_i));
+        scratch.setTo(0);
+    }
+
+    // 4 绘制所有有效轮廓
+    // PAINT THE FOUND REGIONS BACK INTO THE IMAGE
+    mask.setTo(0);
+    cv::drawContours(mask, contours, -1, CVX_WHITE, cv::FILLED);
+}
 
 
 
@@ -409,12 +492,14 @@ class CbBackgroudDiff {
 
 void help(const char * argv[]) {
     std::cout << "\n"
-    << "Train a codebook background model on the first <#frames to train on> frames of an incoming video, then run the model\n"
-    << argv[0] <<" <#frames to train on> <avi_path/filename>\n"
-    << "For example:\n"
-    << argv[0] << " 50 ../tree.avi\n"
-    << "'A' or 'a' to adjust thresholds, esc, 'q' or 'Q' to quit"
-    << std::endl;
+              << "We test out our connected components algorithm using the background code from example CodeBook\n"
+              << "First we train a codebook background model on the first <#frames to train on> frames"
+              << "of an incoming video, then run the model on it cleaning it up with findConnectedComponents\n"
+              << argv[0] << "<#frames to train on> <avi_path/filename>\n"
+              << "For example:\n"
+              << argv[0] << " 50 ../tree.avi\n"
+              << "'A' or 'a' to adjust thresholds, esc, 'q' or 'Q' to quit"
+              << std::endl;
 }
 
 
@@ -488,6 +573,12 @@ void adjustThresholds(cv::Mat &Irgb, CbBackgroudDiff &bgd) {
 
 
 
+// Ref to bounding box rectangle return vector
+std::vector<cv::Rect> bbs;
+// Ref to contour centers return vector
+std::vector<cv::Point> centers;
+
+
 int main(int argc, const char * argv[]) {
     // 验证参数合法
     if (argc < 3) {
@@ -504,18 +595,17 @@ int main(int argc, const char * argv[]) {
         return -1;
     }
     
+    // 创建视频播放窗口
+    cv::namedWindow(argv[0], cv::WINDOW_AUTOSIZE);
+    
     // 1 训练背景模型
     // 需要训练的视频帧数
     int number_to_train_on = atoi(argv[1]);
     std::cout << "Total frames to train on = " << number_to_train_on << std::endl;
-    // 创建视频播放窗口
-    cv::namedWindow(argv[0], cv::WINDOW_AUTOSIZE);
-    
     // FIRST PROCESSING LOOP (TRAINING):
     int frameIndex = 0;
     cv::Mat image;
     CbBackgroudDiff bgd;
-
     while (1) {
         std::cout << "frame#: " << frameIndex;
         cap >> image;
@@ -523,7 +613,6 @@ int main(int argc, const char * argv[]) {
             // Something went wrong, abort
             exit(1);
         }
-        
         if (frameIndex == 0) {
             // 1.1 首帧时创建背景模型
             bgd.init(image);
@@ -532,7 +621,7 @@ int main(int argc, const char * argv[]) {
         // 1.2 更新背景模型
         std::cout << ", Codebooks: " << bgd.updateCodebookBackground(image) << std::endl;
         
-        // 1。3 显示原图
+        // 1.3 显示原图
         cv::imshow(argv[0], image);
         frameIndex++;
         
@@ -551,6 +640,7 @@ int main(int argc, const char * argv[]) {
 
     char seg[] = "Segmentation";
     cv::namedWindow(seg, cv::WINDOW_AUTOSIZE);
+    cv::namedWindow("Conected Components", cv::WINDOW_AUTOSIZE);
     // SECOND PROCESSING LOOP (TESTING):
     int key = cv::waitKey();
     // esc, 'q' or 'Q' to exit
@@ -568,7 +658,7 @@ int main(int argc, const char * argv[]) {
             std::cout << "y,u,v for channel; l for minMod, h for maxMod threshold; , for down, . for up; esq or q to quit;" << std::endl;
             adjustThresholds(image, bgd);
         } else {
-            // 提取前景对下
+            // 提取前景对象
             if (bgd.backgroundDiffBackground(image)) {
                 std::cerr << "ERROR, bdg.backgroundDiffBackground(...) failed" << std::endl;
                 exit(-1);
@@ -577,6 +667,8 @@ int main(int argc, const char * argv[]) {
         // 2.2 显示图像
         cv::imshow(argv[0], image);
         cv::imshow("Segmentation", bgd.mask);
+        findConnectedComponents(bgd.mask, 1, 4, bbs, centers);
+        cv::imshow("Conected Components", bgd.mask);
         
         // 挂起程序
         key = cv::waitKey();
