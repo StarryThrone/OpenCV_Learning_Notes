@@ -102,9 +102,10 @@ int updateCodebook(const cv::Vec3b& p, CodeBook& c, int* cbBounds, int numChanne
     if (c.size() == 0) {
         c.t = 0;
     }
-    //Record learning event
+    // Record learning event
     c.t += 1;
-    //SET HIGH AND LOW BOUNDS
+    // SET HIGH AND LOW BOUNDS
+    // 计算以当前像素为中心的盒子上下边界值
     unsigned int high[3], low[3];
     for (int i = 0; i < numChannels; i++) {
         high[i] = p[i] + *(cbBounds + i);
@@ -143,6 +144,7 @@ int updateCodebook(const cv::Vec3b& p, CodeBook& c, int* cbBounds, int numChanne
                 }
 
                 // SLOWLY ADJUST LEARNING BOUNDS
+                // 如果匹配的码书元素学习阈值位于当前像素为中心的盒子边界值外，则逐渐扩张匹配到的码书元素学习阈值
                 if (c[i].learnHigh[j] < high[j]) {
                     c[i].learnHigh[j] += 1;
                 }
@@ -187,7 +189,6 @@ int updateCodebook(const cv::Vec3b& p, CodeBook& c, int* cbBounds, int numChanne
 // During learning, after you've learned for some period of time,
 // periodically call this to clear out stale codebook entries
 // 长时间未被更新的码书元素可以认为是背景中偶尔出现的前景物体，这些元素需要删除
-int foo = 0;
 /// return number of entries cleared
 /// @param c Codebook to clean up
 int clearStaleEntries(CodeBook &c) {
@@ -574,7 +575,8 @@ int main(int argc, const char * argv[]) {
                 exit(-1);
             }
         }
-        // 2.2 显示前景对象
+        // 2.2 显示图像
+        cv::imshow(argv[0], image);
         cv::imshow("Segmentation", bgd.mask);
         
         // 挂起程序
