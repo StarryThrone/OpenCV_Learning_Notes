@@ -16,6 +16,17 @@
 		F545804D255E6E14000007AA /* libopencv_highgui.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F545804B255E6E14000007AA /* libopencv_highgui.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F545804F255E6E61000007AA /* libopencv_imgproc.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F545804E255E6E61000007AA /* libopencv_imgproc.4.2.0.dylib */; };
 		F5458050255E6E61000007AA /* libopencv_imgproc.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F545804E255E6E61000007AA /* libopencv_imgproc.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F54BDFDE256293B300D2B6FB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F54BDFDD256293B300D2B6FB /* main.cpp */; };
+		F54BDFE32562940100D2B6FB /* libopencv_core.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5458041255E61BD000007AA /* libopencv_core.4.2.0.dylib */; };
+		F54BDFE42562940100D2B6FB /* libopencv_core.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F5458041255E61BD000007AA /* libopencv_core.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F54BDFE62562943700D2B6FB /* libopencv_imgproc.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F545804E255E6E61000007AA /* libopencv_imgproc.4.2.0.dylib */; };
+		F54BDFE72562943700D2B6FB /* libopencv_imgproc.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F545804E255E6E61000007AA /* libopencv_imgproc.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F54BDFE92562947C00D2B6FB /* libopencv_videoio.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F54BDFE82562947C00D2B6FB /* libopencv_videoio.4.2.0.dylib */; };
+		F54BDFEA2562947C00D2B6FB /* libopencv_videoio.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F54BDFE82562947C00D2B6FB /* libopencv_videoio.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F54BDFEB256294B600D2B6FB /* libopencv_highgui.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F545804B255E6E14000007AA /* libopencv_highgui.4.2.0.dylib */; };
+		F54BDFEC256294B600D2B6FB /* libopencv_highgui.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F545804B255E6E14000007AA /* libopencv_highgui.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F54BDFED2562955B00D2B6FB /* libopencv_video.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5458048255E6345000007AA /* libopencv_video.4.2.0.dylib */; };
+		F54BDFEE2562955B00D2B6FB /* libopencv_video.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F5458048255E6345000007AA /* libopencv_video.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +53,30 @@
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F54BDFD9256293B200D2B6FB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		F54BDFE52562940200D2B6FB /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F54BDFEE2562955B00D2B6FB /* libopencv_video.4.2.0.dylib in Embed Libraries */,
+				F54BDFE42562940100D2B6FB /* libopencv_core.4.2.0.dylib in Embed Libraries */,
+				F54BDFEC256294B600D2B6FB /* libopencv_highgui.4.2.0.dylib in Embed Libraries */,
+				F54BDFE72562943700D2B6FB /* libopencv_imgproc.4.2.0.dylib in Embed Libraries */,
+				F54BDFEA2562947C00D2B6FB /* libopencv_videoio.4.2.0.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +87,9 @@
 		F5458048255E6345000007AA /* libopencv_video.4.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_video.4.2.0.dylib; path = ../Frameworks/libopencv_video.4.2.0.dylib; sourceTree = "<group>"; };
 		F545804B255E6E14000007AA /* libopencv_highgui.4.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_highgui.4.2.0.dylib; path = ../Frameworks/libopencv_highgui.4.2.0.dylib; sourceTree = "<group>"; };
 		F545804E255E6E61000007AA /* libopencv_imgproc.4.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.4.2.0.dylib; path = ../Frameworks/libopencv_imgproc.4.2.0.dylib; sourceTree = "<group>"; };
+		F54BDFDB256293B200D2B6FB /* FarnebackOpticalFlow */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FarnebackOpticalFlow; sourceTree = BUILT_PRODUCTS_DIR; };
+		F54BDFDD256293B300D2B6FB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		F54BDFE82562947C00D2B6FB /* libopencv_videoio.4.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videoio.4.2.0.dylib; path = ../Frameworks/libopencv_videoio.4.2.0.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +104,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F54BDFD8256293B200D2B6FB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F54BDFED2562955B00D2B6FB /* libopencv_video.4.2.0.dylib in Frameworks */,
+				F54BDFE32562940100D2B6FB /* libopencv_core.4.2.0.dylib in Frameworks */,
+				F54BDFEB256294B600D2B6FB /* libopencv_highgui.4.2.0.dylib in Frameworks */,
+				F54BDFE62562943700D2B6FB /* libopencv_imgproc.4.2.0.dylib in Frameworks */,
+				F54BDFE92562947C00D2B6FB /* libopencv_videoio.4.2.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -73,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				F5458039255E60A6000007AA /* KalmanFilter */,
+				F54BDFDC256293B300D2B6FB /* FarnebackOpticalFlow */,
 				F5458029255E6023000007AA /* Products */,
 				F5458040255E61BC000007AA /* Frameworks */,
 			);
@@ -82,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				F5458038255E60A6000007AA /* KalmanFilter */,
+				F54BDFDB256293B200D2B6FB /* FarnebackOpticalFlow */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -97,6 +149,7 @@
 		F5458040255E61BC000007AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F54BDFE82562947C00D2B6FB /* libopencv_videoio.4.2.0.dylib */,
 				F545804E255E6E61000007AA /* libopencv_imgproc.4.2.0.dylib */,
 				F545804B255E6E14000007AA /* libopencv_highgui.4.2.0.dylib */,
 				F5458048255E6345000007AA /* libopencv_video.4.2.0.dylib */,
@@ -104,6 +157,14 @@
 				F5458041255E61BD000007AA /* libopencv_core.4.2.0.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F54BDFDC256293B300D2B6FB /* FarnebackOpticalFlow */ = {
+			isa = PBXGroup;
+			children = (
+				F54BDFDD256293B300D2B6FB /* main.cpp */,
+			);
+			path = FarnebackOpticalFlow;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +188,24 @@
 			productReference = F5458038255E60A6000007AA /* KalmanFilter */;
 			productType = "com.apple.product-type.tool";
 		};
+		F54BDFDA256293B200D2B6FB /* FarnebackOpticalFlow */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F54BDFE1256293B300D2B6FB /* Build configuration list for PBXNativeTarget "FarnebackOpticalFlow" */;
+			buildPhases = (
+				F54BDFE52562940200D2B6FB /* Embed Libraries */,
+				F54BDFD7256293B200D2B6FB /* Sources */,
+				F54BDFD8256293B200D2B6FB /* Frameworks */,
+				F54BDFD9256293B200D2B6FB /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FarnebackOpticalFlow;
+			productName = FarnebackOpticalFlow;
+			productReference = F54BDFDB256293B200D2B6FB /* FarnebackOpticalFlow */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -136,6 +215,9 @@
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
 					F5458037255E60A6000007AA = {
+						CreatedOnToolsVersion = 12.1;
+					};
+					F54BDFDA256293B200D2B6FB = {
 						CreatedOnToolsVersion = 12.1;
 					};
 				};
@@ -154,6 +236,7 @@
 			projectRoot = "";
 			targets = (
 				F5458037255E60A6000007AA /* KalmanFilter */,
+				F54BDFDA256293B200D2B6FB /* FarnebackOpticalFlow */,
 			);
 		};
 /* End PBXProject section */
@@ -164,6 +247,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F545803B255E60A6000007AA /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F54BDFD7256293B200D2B6FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F54BDFDE256293B300D2B6FB /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +394,26 @@
 			};
 			name = Release;
 		};
+		F54BDFDF256293B300D2B6FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HABU2A8ZM2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F54BDFE0256293B300D2B6FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HABU2A8ZM2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -320,6 +431,15 @@
 			buildConfigurations = (
 				F545803D255E60A6000007AA /* Debug */,
 				F545803E255E60A6000007AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F54BDFE1256293B300D2B6FB /* Build configuration list for PBXNativeTarget "FarnebackOpticalFlow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F54BDFDF256293B300D2B6FB /* Debug */,
+				F54BDFE0256293B300D2B6FB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
