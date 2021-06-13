@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F52B87D82675DCB40065507A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F52B87D72675DCB40065507A /* main.cpp */; };
+		F52B87DD2675DD150065507A /* libopencv_calib3d.4.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F564E76025ECDB27000E72CD /* libopencv_calib3d.4.5.1.dylib */; };
+		F52B87DE2675DD150065507A /* libopencv_calib3d.4.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F564E76025ECDB27000E72CD /* libopencv_calib3d.4.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F52B87DF2675DD150065507A /* libopencv_core.4.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F564E75925ECDACB000E72CD /* libopencv_core.4.5.1.dylib */; };
+		F52B87E02675DD150065507A /* libopencv_core.4.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F564E75925ECDACB000E72CD /* libopencv_core.4.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F52B87E12675DD150065507A /* libopencv_highgui.4.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F564E76625ECDB82000E72CD /* libopencv_highgui.4.5.1.dylib */; };
+		F52B87E22675DD150065507A /* libopencv_highgui.4.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F564E76625ECDB82000E72CD /* libopencv_highgui.4.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F52B87E32675DD150065507A /* libopencv_imgproc.4.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F564E76325ECDB5F000E72CD /* libopencv_imgproc.4.5.1.dylib */; };
+		F52B87E42675DD150065507A /* libopencv_imgproc.4.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F564E76325ECDB5F000E72CD /* libopencv_imgproc.4.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F52B87E72675DD150065507A /* libopencv_videoio.4.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F52B87E62675DD150065507A /* libopencv_videoio.4.2.0.dylib */; };
+		F52B87E82675DD150065507A /* libopencv_videoio.4.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F52B87E62675DD150065507A /* libopencv_videoio.4.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F564E75A25ECDACB000E72CD /* libopencv_core.4.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F564E75925ECDACB000E72CD /* libopencv_core.4.5.1.dylib */; };
 		F564E75B25ECDACB000E72CD /* libopencv_core.4.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F564E75925ECDACB000E72CD /* libopencv_core.4.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F564E75E25ECDAF7000E72CD /* libopencv_imgcodecs.4.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F564E75D25ECDAF7000E72CD /* libopencv_imgcodecs.4.5.1.dylib */; };
@@ -21,6 +32,30 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		F52B87D32675DCB40065507A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		F52B87E52675DD150065507A /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F52B87E02675DD150065507A /* libopencv_core.4.5.1.dylib in Embed Libraries */,
+				F52B87E42675DD150065507A /* libopencv_imgproc.4.5.1.dylib in Embed Libraries */,
+				F52B87E82675DD150065507A /* libopencv_videoio.4.2.0.dylib in Embed Libraries */,
+				F52B87E22675DD150065507A /* libopencv_highgui.4.5.1.dylib in Embed Libraries */,
+				F52B87DE2675DD150065507A /* libopencv_calib3d.4.5.1.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F564E75C25ECDACB000E72CD /* Embed Libraries */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -48,6 +83,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F52B87D52675DCB40065507A /* FundamentalMatrix */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FundamentalMatrix; sourceTree = BUILT_PRODUCTS_DIR; };
+		F52B87D72675DCB40065507A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		F52B87E62675DD150065507A /* libopencv_videoio.4.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videoio.4.2.0.dylib; path = ../Frameworks/libopencv_videoio.4.2.0.dylib; sourceTree = "<group>"; };
 		F564E75925ECDACB000E72CD /* libopencv_core.4.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.4.5.1.dylib; path = ../Frameworks/libopencv_core.4.5.1.dylib; sourceTree = "<group>"; };
 		F564E75D25ECDAF7000E72CD /* libopencv_imgcodecs.4.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgcodecs.4.5.1.dylib; path = ../Frameworks/libopencv_imgcodecs.4.5.1.dylib; sourceTree = "<group>"; };
 		F564E76025ECDB27000E72CD /* libopencv_calib3d.4.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_calib3d.4.5.1.dylib; path = ../Frameworks/libopencv_calib3d.4.5.1.dylib; sourceTree = "<group>"; };
@@ -58,6 +96,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F52B87D22675DCB40065507A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F52B87DF2675DD150065507A /* libopencv_core.4.5.1.dylib in Frameworks */,
+				F52B87E32675DD150065507A /* libopencv_imgproc.4.5.1.dylib in Frameworks */,
+				F52B87E72675DD150065507A /* libopencv_videoio.4.2.0.dylib in Frameworks */,
+				F52B87E12675DD150065507A /* libopencv_highgui.4.5.1.dylib in Frameworks */,
+				F52B87DD2675DD150065507A /* libopencv_calib3d.4.5.1.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F5723AE225DA66A400D824E9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -73,9 +123,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F52B87D62675DCB40065507A /* FundamentalMatrix */ = {
+			isa = PBXGroup;
+			children = (
+				F52B87D72675DCB40065507A /* main.cpp */,
+			);
+			path = FundamentalMatrix;
+			sourceTree = "<group>";
+		};
 		F564E75825ECDACB000E72CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F52B87E62675DD150065507A /* libopencv_videoio.4.2.0.dylib */,
 				F564E76625ECDB82000E72CD /* libopencv_highgui.4.5.1.dylib */,
 				F564E76325ECDB5F000E72CD /* libopencv_imgproc.4.5.1.dylib */,
 				F564E76025ECDB27000E72CD /* libopencv_calib3d.4.5.1.dylib */,
@@ -89,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				F5723AE625DA66A400D824E9 /* BirdEyeView */,
+				F52B87D62675DCB40065507A /* FundamentalMatrix */,
 				F5723AD725DA666600D824E9 /* Products */,
 				F564E75825ECDACB000E72CD /* Frameworks */,
 			);
@@ -98,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				F5723AE525DA66A400D824E9 /* BirdEyeView */,
+				F52B87D52675DCB40065507A /* FundamentalMatrix */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,6 +174,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		F52B87D42675DCB40065507A /* FundamentalMatrix */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F52B87D92675DCB40065507A /* Build configuration list for PBXNativeTarget "FundamentalMatrix" */;
+			buildPhases = (
+				F52B87E52675DD150065507A /* Embed Libraries */,
+				F52B87D12675DCB40065507A /* Sources */,
+				F52B87D22675DCB40065507A /* Frameworks */,
+				F52B87D32675DCB40065507A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FundamentalMatrix;
+			productName = FundamentalMatrix;
+			productReference = F52B87D52675DCB40065507A /* FundamentalMatrix */;
+			productType = "com.apple.product-type.tool";
+		};
 		F5723AE425DA66A400D824E9 /* BirdEyeView */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F5723AE925DA66A400D824E9 /* Build configuration list for PBXNativeTarget "BirdEyeView" */;
@@ -139,6 +218,9 @@
 			attributes = {
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
+					F52B87D42675DCB40065507A = {
+						CreatedOnToolsVersion = 12.3;
+					};
 					F5723AE425DA66A400D824E9 = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -158,11 +240,20 @@
 			projectRoot = "";
 			targets = (
 				F5723AE425DA66A400D824E9 /* BirdEyeView */,
+				F52B87D42675DCB40065507A /* FundamentalMatrix */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F52B87D12675DCB40065507A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F52B87D82675DCB40065507A /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F5723AE125DA66A400D824E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -174,6 +265,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		F52B87DA2675DCB40065507A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F52B87DB2675DCB40065507A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		F5723ADB25DA666600D824E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -310,6 +417,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F52B87D92675DCB40065507A /* Build configuration list for PBXNativeTarget "FundamentalMatrix" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F52B87DA2675DCB40065507A /* Debug */,
+				F52B87DB2675DCB40065507A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F5723AD125DA666600D824E9 /* Build configuration list for PBXProject "C15_Projection" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
