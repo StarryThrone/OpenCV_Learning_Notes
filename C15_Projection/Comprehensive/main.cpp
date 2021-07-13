@@ -45,64 +45,80 @@ static void StereoCalib(const char *imageList, int nx, int ny, bool useUncalibra
       return;
     }
 
+    // 一些可以自定义算法处理细节的变量
+    // 是否需要显示角点
     bool displayCorners = true;
     bool showUndistorted = true;
     // 立体相机系统的两个摄像机是否是垂直排列的
     bool isVerticalStereo = false;
     const int maxScale = 1;
     const float squareSize = 1.f;
+    
+    // 图片的实际大小，这里假定所有的图片大小一致
+    cv::Size imageSize;
+
 
     // actual square size
-    int i, j, lr;
     int N = nx * ny;
     cv::Size board_sz = cv::Size(nx, ny);
-    std::vector<std::string> imageNames[2];
     std::vector<cv::Point3f> boardModel;
     std::vector<std::vector<cv::Point3f>> objectPoints;
     std::vector<std::vector<cv::Point2f>> points[2];
     std::vector<cv::Point2f> corners[2];
-    bool found[2] = {false, false};
-    cv::Size imageSize;
 
-    for (i = 0; i < ny; i++) {
-        for (j = 0; j < nx; j++) {
+    for (int i = 0; i < ny; i++) {
+        for (int j = 0; j < nx; j++) {
             boardModel.push_back(cv::Point3f((float)(i * squareSize), (float)(j * squareSize), 0.f));
         }
     }
     
-    i = 0;
-    for ( ; ; ) {
+    // 保存左右图像向量的数组
+    // 数组第一个元素保存左侧图像的向量列表
+    // 数组第二个元素保存右侧图像的向量列表
+    std::vector<std::string> imageNames[2];
+    // 左右图像是否寻找到了所有角点
+    bool found[2] = {false, false};
+    // 循环读取所有图像
+    int lineIndex = 0;
+    while (true) {
+        // 用于存储单次读取结果的数组
         char buf[1024];
-        lr = i % 2;
-        if (lr == 0) {
-            found[0] = found[1] = false;
-        }
+        // 读取数据时使用一个较大缓存，确保一次能够读取完整一行
         if (!fgets(buf, sizeof(buf) - 3, f)) {
           break;
         }
+        // 将读取到的文件行末尾的空格都替换为字符串结束标志符\0，确保读取图像文件时文件名不会异常
         size_t len = strlen(buf);
         while (len > 0 && isspace(buf[len - 1])) {
             buf[--len] = '\0';
         }
+        // 如果文件行以#开头，表示需要忽略该行数据
         if (buf[0] == '#') {
             continue;
         }
+        // 如果图片读取失败，直接跳到下一行
         cv::Mat img = cv::imread(buf, 0);
         if (img.empty()) {
             break;
         }
-        imageSize = img.size();
-        imageNames[lr].push_back(buf);
-        i++;
 
-        // If we did not find board on the left image,
-        // it does not make sense to find it on the right.
-        //
+        // 偶数行的文件名表示左侧图像，奇数行的文件名表示右侧图像
+        int lr = lineIndex % 2;
+        lineIndex++;
+        if (lr == 0) {
+            // 每次读取左侧图像时都将左右图像的角点搜索状态修改为初始值false
+            found[0] = found[1] = false;
+        }
+        // 在处理右侧图像时，如果左侧图像未找到棋盘角点，那么即使右侧图像找到也没有价值，因此直接跳过
         if (lr == 1 && !found[0]) {
             continue;
         }
 
+        imageSize = img.size();
+        imageNames[lr].push_back(buf);
+
         // Find circle grids and centers therein:
+        // 寻找原点网格和中心
         for (int s = 1; s <= maxScale; s++) {
             cv::Mat timg = img;
             if (s > 1) {
@@ -136,142 +152,142 @@ static void StereoCalib(const char *imageList, int nx, int ny, bool useUncalibra
             // Allow ESC to quit
             if ((cv::waitKey(0) & 255) == 27) {
                 exit(-1);
-            } else {
-                std::cout << '.';
             }
-            if (lr == 1 && found[0] && found[1]) {
-                objectPoints.push_back(boardModel);
-                points[0].push_back(corners[0]);
-                points[1].push_back(corners[1]);
-            }
+        } else {
+            std::cout << '.';
         }
-        fclose(f);
-
-        // CALIBRATE THE STEREO CAMERAS
-        cv::Mat M1 = cv::Mat::eye(3, 3, CV_64F);
-        cv::Mat M2 = cv::Mat::eye(3, 3, CV_64F);
-        cv::Mat D1, D2, R, T, E, F;
-        std::cout << "\nRunning stereo calibration ...\n";
-        cv::stereoCalibrate(objectPoints, points[0], points[1], M1, D1, M2, D2, imageSize, R, T, E, F,
-                            cv::CALIB_FIX_ASPECT_RATIO | cv::CALIB_ZERO_TANGENT_DIST |
-                            cv::CALIB_SAME_FOCAL_LENGTH,
-                            cv::TermCriteria(cv::TermCriteria::COUNT | cv::TermCriteria::EPS, 100, 1e-5));
-        std::cout << "Done! Press any key to step through images, ESC to exit\n\n";
-
-        // CALIBRATION QUALITY CHECK
-        // because the output fundamental matrix implicitly
-        // includes all the output information,
-        // we can check the quality of calibration using the
-        // epipolar geometry constraint: m2^t*F*m1=0
-        std::vector<cv::Point3f> lines[2];
-        double avgErr = 0;
-        int nframes = (int)objectPoints.size();
-        for (i = 0; i < nframes; i++) {
-            std::vector<cv::Point2f> &pt0 = points[0][i];
-            std::vector<cv::Point2f> &pt1 = points[1][i];
-            cv::undistortPoints(pt0, pt0, M1, D1, cv::Mat(), M1);
-            cv::undistortPoints(pt1, pt1, M2, D2, cv::Mat(), M2);
-            cv::computeCorrespondEpilines(pt0, 1, F, lines[0]);
-            cv::computeCorrespondEpilines(pt1, 2, F, lines[1]);
-
-            for (j = 0; j < N; j++) {
-                double err = fabs(pt0[j].x * lines[1][j].x + pt0[j].y * lines[1][j].y + lines[1][j].z) +
-                             fabs(pt1[j].x * lines[0][j].x + pt1[j].y * lines[0][j].y + lines[0][j].z);
-                avgErr += err;
-            }
+        if (lr == 1 && found[0] && found[1]) {
+            objectPoints.push_back(boardModel);
+            points[0].push_back(corners[0]);
+            points[1].push_back(corners[1]);
         }
-        std::cout << "avg err = " << avgErr / (nframes * N) << std::endl;
+    }
+    fclose(f);
 
-        // COMPUTE AND DISPLAY RECTIFICATION
-        //
-        if (showUndistorted) {
-            cv::Mat R1, R2, P1, P2, map11, map12, map21, map22;
+    // CALIBRATE THE STEREO CAMERAS
+    cv::Mat M1 = cv::Mat::eye(3, 3, CV_64F);
+    cv::Mat M2 = cv::Mat::eye(3, 3, CV_64F);
+    cv::Mat D1, D2, R, T, E, F;
+    std::cout << "\nRunning stereo calibration ...\n";
+    cv::stereoCalibrate(objectPoints, points[0], points[1], M1, D1, M2, D2, imageSize, R, T, E, F,
+                        cv::CALIB_FIX_ASPECT_RATIO | cv::CALIB_ZERO_TANGENT_DIST |
+                        cv::CALIB_SAME_FOCAL_LENGTH,
+                        cv::TermCriteria(cv::TermCriteria::COUNT | cv::TermCriteria::EPS, 100, 1e-5));
+    std::cout << "Done! Press any key to step through images, ESC to exit\n\n";
 
-            if (!useUncalibrated) {
-                // IF BY CALIBRATED (BOUGUET'S METHOD)
-                stereoRectify(M1, D1, M2, D2, imageSize, R, T, R1, R2, P1, P2, cv::noArray(), 0);
-                isVerticalStereo = fabs(P2.at<double>(1, 3)) > fabs(P2.at<double>(0, 3));
-                // Precompute maps for cvRemap()
-                initUndistortRectifyMap(M1, D1, R1, P1, imageSize, CV_16SC2, map11, map12);
-                initUndistortRectifyMap(M2, D2, R2, P2, imageSize, CV_16SC2, map21, map22);
-            } else {
-                // OR ELSE HARTLEY'S METHOD
-                // use intrinsic parameters of each camera, but
-                // compute the rectification transformation directly
-                // from the fundamental matrix
-                std::vector<cv::Point2f> allpoints[2];
-                for (i = 0; i < nframes; i++) {
-                    copy(points[0][i].begin(), points[0][i].end(), back_inserter(allpoints[0]));
-                    copy(points[1][i].begin(), points[1][i].end(), back_inserter(allpoints[1]));
-                }
-                cv::Mat F = findFundamentalMat(allpoints[0], allpoints[1], cv::FM_8POINT);
-                cv::Mat H1, H2;
-                cv::stereoRectifyUncalibrated(allpoints[0], allpoints[1], F, imageSize,
-                                              H1, H2, 3);
-                R1 = M1.inv() * H1 * M1;
-                R2 = M2.inv() * H2 * M2;
+    // CALIBRATION QUALITY CHECK
+    // because the output fundamental matrix implicitly
+    // includes all the output information,
+    // we can check the quality of calibration using the
+    // epipolar geometry constraint: m2^t*F*m1=0
+    std::vector<cv::Point3f> lines[2];
+    double avgErr = 0;
+    int nframes = (int)objectPoints.size();
+    for (i = 0; i < nframes; i++) {
+        std::vector<cv::Point2f> &pt0 = points[0][i];
+        std::vector<cv::Point2f> &pt1 = points[1][i];
+        cv::undistortPoints(pt0, pt0, M1, D1, cv::Mat(), M1);
+        cv::undistortPoints(pt1, pt1, M2, D2, cv::Mat(), M2);
+        cv::computeCorrespondEpilines(pt0, 1, F, lines[0]);
+        cv::computeCorrespondEpilines(pt1, 2, F, lines[1]);
 
-                // Precompute map for cvRemap()
-                cv::initUndistortRectifyMap(M1, D1, R1, P1, imageSize, CV_16SC2, map11,
-                                            map12);
-                cv::initUndistortRectifyMap(M2, D2, R2, P2, imageSize, CV_16SC2, map21,
-                                            map22);
-            }
+        for (j = 0; j < N; j++) {
+            double err = fabs(pt0[j].x * lines[1][j].x + pt0[j].y * lines[1][j].y + lines[1][j].z) +
+                         fabs(pt1[j].x * lines[0][j].x + pt1[j].y * lines[0][j].y + lines[0][j].z);
+            avgErr += err;
+        }
+    }
+    std::cout << "avg err = " << avgErr / (nframes * N) << std::endl;
 
-            // RECTIFY THE IMAGES AND FIND DISPARITY MAPS
-            //
-            cv::Mat pair;
-            if (!isVerticalStereo) {
-                pair.create(imageSize.height, imageSize.width * 2, CV_8UC3);
-            } else {
-                pair.create(imageSize.height * 2, imageSize.width, CV_8UC3);
-            }
+    // COMPUTE AND DISPLAY RECTIFICATION
+    //
+    if (showUndistorted) {
+        cv::Mat R1, R2, P1, P2, map11, map12, map21, map22;
 
-            // Setup for finding stereo corrrespondences
-            cv::Ptr<cv::StereoSGBM> stereo = cv::StereoSGBM::create(-64, 128, 11, 100, 1000, 32, 0, 15, 1000, 16, cv::StereoSGBM::MODE_HH);
-
+        if (!useUncalibrated) {
+            // IF BY CALIBRATED (BOUGUET'S METHOD)
+            stereoRectify(M1, D1, M2, D2, imageSize, R, T, R1, R2, P1, P2, cv::noArray(), 0);
+            isVerticalStereo = fabs(P2.at<double>(1, 3)) > fabs(P2.at<double>(0, 3));
+            // Precompute maps for cvRemap()
+            initUndistortRectifyMap(M1, D1, R1, P1, imageSize, CV_16SC2, map11, map12);
+            initUndistortRectifyMap(M2, D2, R2, P2, imageSize, CV_16SC2, map21, map22);
+        } else {
+            // OR ELSE HARTLEY'S METHOD
+            // use intrinsic parameters of each camera, but
+            // compute the rectification transformation directly
+            // from the fundamental matrix
+            std::vector<cv::Point2f> allpoints[2];
             for (i = 0; i < nframes; i++) {
-                cv::Mat img1 = cv::imread(imageNames[0][i].c_str(), 0);
-                cv::Mat img2 = cv::imread(imageNames[1][i].c_str(), 0);
-                cv::Mat img1r, img2r, disp, vdisp;
-                if (img1.empty() || img2.empty()) {
-                    continue;
-                }
-                cv::remap(img1, img1r, map11, map12, cv::INTER_LINEAR);
-                cv::remap(img2, img2r, map21, map22, cv::INTER_LINEAR);
-                if (!isVerticalStereo || !useUncalibrated) {
-                    // When the stereo camera is oriented vertically,
-                    // Hartley method does not transpose the
-                    // image, so the epipolar lines in the rectified
-                    // images are vertical. Stereo correspondence
-                    // function does not support such a case.
-                    stereo->compute(img1r, img2r, disp);
-                    cv::normalize(disp, vdisp, 0, 256, cv::NORM_MINMAX, CV_8U);
-                    cv::imshow("disparity", vdisp);
-                }
-                if (!isVerticalStereo) {
-                    cv::Mat part = pair.colRange(0, imageSize.width);
-                    cvtColor(img1r, part, cv::COLOR_GRAY2BGR);
-                    part = pair.colRange(imageSize.width, imageSize.width * 2);
-                    cvtColor(img2r, part, cv::COLOR_GRAY2BGR);
-                    for (j = 0; j < imageSize.height; j += 16) {
-                        cv::line(pair, cv::Point(0, j), cv::Point(imageSize.width * 2, j),
-                                 cv::Scalar(0, 255, 0));
-                    }
-                } else {
-                    cv::Mat part = pair.rowRange(0, imageSize.height);
-                    cv::cvtColor(img1r, part, cv::COLOR_GRAY2BGR);
-                    part = pair.rowRange(imageSize.height, imageSize.height * 2);
-                    cv::cvtColor(img2r, part, cv::COLOR_GRAY2BGR);
-                    for (j = 0; j < imageSize.width; j += 16) {
-                        line(pair, cv::Point(j, 0), cv::Point(j, imageSize.height * 2),
+                copy(points[0][i].begin(), points[0][i].end(), back_inserter(allpoints[0]));
+                copy(points[1][i].begin(), points[1][i].end(), back_inserter(allpoints[1]));
+            }
+            cv::Mat F = findFundamentalMat(allpoints[0], allpoints[1], cv::FM_8POINT);
+            cv::Mat H1, H2;
+            cv::stereoRectifyUncalibrated(allpoints[0], allpoints[1], F, imageSize,
+                                          H1, H2, 3);
+            R1 = M1.inv() * H1 * M1;
+            R2 = M2.inv() * H2 * M2;
+
+            // Precompute map for cvRemap()
+            cv::initUndistortRectifyMap(M1, D1, R1, P1, imageSize, CV_16SC2, map11,
+                                        map12);
+            cv::initUndistortRectifyMap(M2, D2, R2, P2, imageSize, CV_16SC2, map21,
+                                        map22);
+        }
+
+        // RECTIFY THE IMAGES AND FIND DISPARITY MAPS
+        //
+        cv::Mat pair;
+        if (!isVerticalStereo) {
+            pair.create(imageSize.height, imageSize.width * 2, CV_8UC3);
+        } else {
+            pair.create(imageSize.height * 2, imageSize.width, CV_8UC3);
+        }
+
+        // Setup for finding stereo corrrespondences
+        cv::Ptr<cv::StereoSGBM> stereo = cv::StereoSGBM::create(-64, 128, 11, 100, 1000, 32, 0, 15, 1000, 16, cv::StereoSGBM::MODE_HH);
+
+        for (i = 0; i < nframes; i++) {
+            cv::Mat img1 = cv::imread(imageNames[0][i].c_str(), 0);
+            cv::Mat img2 = cv::imread(imageNames[1][i].c_str(), 0);
+            cv::Mat img1r, img2r, disp, vdisp;
+            if (img1.empty() || img2.empty()) {
+                continue;
+            }
+            cv::remap(img1, img1r, map11, map12, cv::INTER_LINEAR);
+            cv::remap(img2, img2r, map21, map22, cv::INTER_LINEAR);
+            if (!isVerticalStereo || !useUncalibrated) {
+                // When the stereo camera is oriented vertically,
+                // Hartley method does not transpose the
+                // image, so the epipolar lines in the rectified
+                // images are vertical. Stereo correspondence
+                // function does not support such a case.
+                stereo->compute(img1r, img2r, disp);
+                cv::normalize(disp, vdisp, 0, 256, cv::NORM_MINMAX, CV_8U);
+                cv::imshow("disparity", vdisp);
+            }
+            if (!isVerticalStereo) {
+                cv::Mat part = pair.colRange(0, imageSize.width);
+                cvtColor(img1r, part, cv::COLOR_GRAY2BGR);
+                part = pair.colRange(imageSize.width, imageSize.width * 2);
+                cvtColor(img2r, part, cv::COLOR_GRAY2BGR);
+                for (j = 0; j < imageSize.height; j += 16) {
+                    cv::line(pair, cv::Point(0, j), cv::Point(imageSize.width * 2, j),
                              cv::Scalar(0, 255, 0));
-                    }
                 }
-                cv::imshow("rectified", pair);
-                if ((cv::waitKey() & 255) == 27) {
-                    break;
+            } else {
+                cv::Mat part = pair.rowRange(0, imageSize.height);
+                cv::cvtColor(img1r, part, cv::COLOR_GRAY2BGR);
+                part = pair.rowRange(imageSize.height, imageSize.height * 2);
+                cv::cvtColor(img2r, part, cv::COLOR_GRAY2BGR);
+                for (j = 0; j < imageSize.width; j += 16) {
+                    line(pair, cv::Point(j, 0), cv::Point(j, imageSize.height * 2),
+                         cv::Scalar(0, 255, 0));
                 }
+            }
+            cv::imshow("rectified", pair);
+            if ((cv::waitKey() & 255) == 27) {
+                break;
             }
         }
     }
