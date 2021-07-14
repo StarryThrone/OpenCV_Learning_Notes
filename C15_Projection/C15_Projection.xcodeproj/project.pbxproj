@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		5599D9AD269D31D900218012 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5599D9AC269D31D900218012 /* main.cpp */; };
+		5599D9BC269ECCFF00218012 /* libopencv_calib3d.4.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F564E76025ECDB27000E72CD /* libopencv_calib3d.4.5.1.dylib */; };
+		5599D9BD269ECCFF00218012 /* libopencv_calib3d.4.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F564E76025ECDB27000E72CD /* libopencv_calib3d.4.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5599D9BE269ECCFF00218012 /* libopencv_core.4.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F564E75925ECDACB000E72CD /* libopencv_core.4.5.1.dylib */; };
+		5599D9BF269ECCFF00218012 /* libopencv_core.4.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F564E75925ECDACB000E72CD /* libopencv_core.4.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5599D9C0269ECCFF00218012 /* libopencv_highgui.4.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F564E76625ECDB82000E72CD /* libopencv_highgui.4.5.1.dylib */; };
+		5599D9C1269ECCFF00218012 /* libopencv_highgui.4.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F564E76625ECDB82000E72CD /* libopencv_highgui.4.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5599D9C2269ECCFF00218012 /* libopencv_imgcodecs.4.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F564E75D25ECDAF7000E72CD /* libopencv_imgcodecs.4.5.1.dylib */; };
+		5599D9C3269ECCFF00218012 /* libopencv_imgcodecs.4.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F564E75D25ECDAF7000E72CD /* libopencv_imgcodecs.4.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5599D9C4269ECCFF00218012 /* libopencv_imgproc.4.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F564E76325ECDB5F000E72CD /* libopencv_imgproc.4.5.1.dylib */; };
+		5599D9C5269ECCFF00218012 /* libopencv_imgproc.4.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F564E76325ECDB5F000E72CD /* libopencv_imgproc.4.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F52B87D82675DCB40065507A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F52B87D72675DCB40065507A /* main.cpp */; };
 		F52B87DD2675DD150065507A /* libopencv_calib3d.4.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F564E76025ECDB27000E72CD /* libopencv_calib3d.4.5.1.dylib */; };
 		F52B87DE2675DD150065507A /* libopencv_calib3d.4.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F564E76025ECDB27000E72CD /* libopencv_calib3d.4.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -41,6 +51,21 @@
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 1;
+		};
+		5599D9C6269ECD0000218012 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5599D9C3269ECCFF00218012 /* libopencv_imgcodecs.4.5.1.dylib in Embed Libraries */,
+				5599D9BF269ECCFF00218012 /* libopencv_core.4.5.1.dylib in Embed Libraries */,
+				5599D9C5269ECCFF00218012 /* libopencv_imgproc.4.5.1.dylib in Embed Libraries */,
+				5599D9C1269ECCFF00218012 /* libopencv_highgui.4.5.1.dylib in Embed Libraries */,
+				5599D9BD269ECCFF00218012 /* libopencv_calib3d.4.5.1.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F52B87D32675DCB40065507A /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -112,6 +137,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5599D9C2269ECCFF00218012 /* libopencv_imgcodecs.4.5.1.dylib in Frameworks */,
+				5599D9BE269ECCFF00218012 /* libopencv_core.4.5.1.dylib in Frameworks */,
+				5599D9C4269ECCFF00218012 /* libopencv_imgproc.4.5.1.dylib in Frameworks */,
+				5599D9C0269ECCFF00218012 /* libopencv_highgui.4.5.1.dylib in Frameworks */,
+				5599D9BC269ECCFF00218012 /* libopencv_calib3d.4.5.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +237,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5599D9B0269D31D900218012 /* Build configuration list for PBXNativeTarget "Comprehensive" */;
 			buildPhases = (
+				5599D9C6269ECD0000218012 /* Embed Libraries */,
 				5599D9A6269D31D800218012 /* Sources */,
 				5599D9A7269D31D800218012 /* Frameworks */,
 				5599D9A8269D31D800218012 /* CopyFiles */,
@@ -327,6 +358,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -336,6 +368,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

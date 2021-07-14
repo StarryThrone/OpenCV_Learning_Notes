@@ -12,10 +12,10 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/calib3d.hpp>
 #include <opencv2/highgui.hpp>
-//#include <opencv2/opencv.hpp>
 
 
-void help(char *argv[]) {
+
+void help(const char * argv[]) {
   std::cout << "\n\nExample Comprehensive. Stereo calibration, rectification, and correspondence"
             << "\n    Reads in list of locations of a sequence of checkerboard calibration"
             << "\n    objects from a left,right stereo camera pair. Calibrates, rectifies and then"
@@ -28,7 +28,7 @@ void help(char *argv[]) {
             << "\n    stereoData/example_comprehensive_list.txt file, you can comment out lines"
             << "\n    there by starting them with #."
             << "\n"
-            << "\nDefault Call (with parameters: board_w = 9, board_h = 6, list = ../stereoData_19-03_list.txt):"
+            << "\nDefault Call (with parameters: board_w = 9, board_h = 6, list = ../stereoData_list.txt):"
             << "\n" << argv[0] << "\n"
             << "\nManual call:"
             << "\n" << argv[0] << " [<board_w> <board_h> <path/list_of_stereo_pairs>]"
@@ -37,7 +37,13 @@ void help(char *argv[]) {
 }
 
 
+/// 立体校正
+/// @param imageList 存储图像对路径列表的txt格式文件
+/// @param nx 棋盘网格的列数
+/// @param ny 棋盘网格的行数
+/// @param useUncalibrated 立体系统校正时使用未标定的相机，还是使用标定后的相机
 static void StereoCalib(const char *imageList, int nx, int ny, bool useUncalibrated) {
+    // 1 参数校验
     // 读取圆点网格图片名字的目录文件
     FILE *f = fopen(imageList, "rt");
     if (!f) {
@@ -48,37 +54,38 @@ static void StereoCalib(const char *imageList, int nx, int ny, bool useUncalibra
     // 一些可以自定义算法处理细节的变量
     // 是否需要显示角点
     bool displayCorners = true;
-    bool showUndistorted = true;
-    // 立体相机系统的两个摄像机是否是垂直排列的
-    bool isVerticalStereo = false;
-    const int maxScale = 1;
-    const float squareSize = 1.f;
     
-    // 图片的实际大小，这里假定所有的图片大小一致
-    cv::Size imageSize;
-
-
-    // actual square size
+    // 棋盘的网格大小
     int N = nx * ny;
-    cv::Size board_sz = cv::Size(nx, ny);
     std::vector<cv::Point3f> boardModel;
-    std::vector<std::vector<cv::Point3f>> objectPoints;
-    std::vector<std::vector<cv::Point2f>> points[2];
-    std::vector<cv::Point2f> corners[2];
-
+    // 棋盘上每个方格的宽度
+    const float squareSize = 1.f;
+    // 计算所有角点的模型坐标
     for (int i = 0; i < ny; i++) {
         for (int j = 0; j < nx; j++) {
             boardModel.push_back(cv::Point3f((float)(i * squareSize), (float)(j * squareSize), 0.f));
         }
     }
     
+    // 2 获取角点坐标数据
+    // 循环读取所有图像
+    // 所有有效图像对的模型坐标向量，其中每个元素都表示单个图片中所有角点位于模型坐标系下的坐标集合
+    std::vector<std::vector<cv::Point3f>> objectPoints;
+    // 所有有效图像对的图像坐标向量，其中每个元素都表示单个图片中所有角点位于图像坐标系下的坐标
+    std::vector<std::vector<cv::Point2f>> points[2];
+    // 用于临时存储一组有效图像对的角点位于图像坐标系下的坐标
+    std::vector<cv::Point2f> corners[2];
+    // 棋盘网格的大小
+    cv::Size board_sz = cv::Size(nx, ny);
     // 保存左右图像向量的数组
     // 数组第一个元素保存左侧图像的向量列表
     // 数组第二个元素保存右侧图像的向量列表
     std::vector<std::string> imageNames[2];
     // 左右图像是否寻找到了所有角点
     bool found[2] = {false, false};
-    // 循环读取所有图像
+    // 图片的实际大小，这里假定所有的图片大小一致
+    cv::Size imageSize;
+    // 文件名在列表文件中的行索引
     int lineIndex = 0;
     while (true) {
         // 用于存储单次读取结果的数组
@@ -117,54 +124,59 @@ static void StereoCalib(const char *imageList, int nx, int ny, bool useUncalibra
         imageSize = img.size();
         imageNames[lr].push_back(buf);
 
-        // Find circle grids and centers therein:
-        // 寻找原点网格和中心
+        // 寻找角点和中心时从标准比例向上缩放的最大比例
+        const int maxScale = 1;
         for (int s = 1; s <= maxScale; s++) {
+            // 从标准比例向上查找，
             cv::Mat timg = img;
             if (s > 1) {
                 resize(img, timg, cv::Size(), s, s, cv::INTER_CUBIC);
             }
-            // Just as example, this would be the call if you had circle calibration
-            // boards ...
-            //      found[lr] = cv::findCirclesGrid(timg, cv::Size(nx, ny),
-            //      corners[lr],
-            //                                      cv::CALIB_CB_ASYMMETRIC_GRID |
-            //                                          cv::CALIB_CB_CLUSTERING);
-            //...but we have chessboards in our images
+            // 如果使用的是圆圈网格标定板，则使用如下代码
+            // found[lr] = cv::findCirclesGrid(timg, cv::Size(nx, ny), corners[lr],
+            //                                 cv::CALIB_CB_ASYMMETRIC_GRID | cv::CALIB_CB_CLUSTERING);
+            // 使用棋盘网格标定板，则使用如下代码
             found[lr] = cv::findChessboardCorners(timg, board_sz, corners[lr]);
-
-            if (found[lr] || s == maxScale) {
-                cv::Mat mcorners(corners[lr]);
-                mcorners *= (1. / s);
-            }
+            // 原代码中的未使用逻辑
+            // if (found[lr] || s == maxScale) {
+            //    cv::Mat mcorners(corners[lr]);
+            //    mcorners *= (1. / s);
+            // }
             if (found[lr]) {
+                // 找到角点就退出循环
                 break;
             }
         }
+        // 必要时显示每一张图片的角点查询结果
         if (displayCorners) {
+            // 打印文件名
             std::cout << buf << std::endl;
+            // 将灰度图转化为RGB图像，实际上还是灰度图，只是变成了三个通道。这是显示图像的接口能够接受的格式。
             cv::Mat cimg;
             cv::cvtColor(img, cimg, cv::COLOR_GRAY2BGR);
 
-            // draw chessboard corners works for circle grids too
+            // 在棋盘图像上绘制角点查询结果
             cv::drawChessboardCorners(cimg, cv::Size(nx, ny), corners[lr], found[lr]);
             cv::imshow("Corners", cimg);
-            // Allow ESC to quit
+            // 阻塞当前线程，输入ESC键退出程序，其他键处理下一张图片
             if ((cv::waitKey(0) & 255) == 27) {
                 exit(-1);
             }
         } else {
             std::cout << '.';
         }
+        // 对于每个图像对，如果左右图像都成功找到Lee所有角点，则认为是有效图像对，存储模型坐标数据，以及图像对中每个图像内部
+        // 基于图像坐标系的坐标数据
         if (lr == 1 && found[0] && found[1]) {
             objectPoints.push_back(boardModel);
             points[0].push_back(corners[0]);
             points[1].push_back(corners[1]);
         }
     }
+    // 关闭文件
     fclose(f);
 
-    // CALIBRATE THE STEREO CAMERAS
+    // 3 标定立体相机
     cv::Mat M1 = cv::Mat::eye(3, 3, CV_64F);
     cv::Mat M2 = cv::Mat::eye(3, 3, CV_64F);
     cv::Mat D1, D2, R, T, E, F;
@@ -175,23 +187,19 @@ static void StereoCalib(const char *imageList, int nx, int ny, bool useUncalibra
                         cv::TermCriteria(cv::TermCriteria::COUNT | cv::TermCriteria::EPS, 100, 1e-5));
     std::cout << "Done! Press any key to step through images, ESC to exit\n\n";
 
-    // CALIBRATION QUALITY CHECK
-    // because the output fundamental matrix implicitly
-    // includes all the output information,
-    // we can check the quality of calibration using the
-    // epipolar geometry constraint: m2^t*F*m1=0
+    // 标定质量检测
+    // 因为基础矩阵隐式包含了所有输出信息，可以使用极线约束【m2^t*F*m1=0】检查标定的质量
     std::vector<cv::Point3f> lines[2];
     double avgErr = 0;
     int nframes = (int)objectPoints.size();
-    for (i = 0; i < nframes; i++) {
+    for (int i = 0; i < nframes; i++) {
         std::vector<cv::Point2f> &pt0 = points[0][i];
         std::vector<cv::Point2f> &pt1 = points[1][i];
         cv::undistortPoints(pt0, pt0, M1, D1, cv::Mat(), M1);
         cv::undistortPoints(pt1, pt1, M2, D2, cv::Mat(), M2);
         cv::computeCorrespondEpilines(pt0, 1, F, lines[0]);
         cv::computeCorrespondEpilines(pt1, 2, F, lines[1]);
-
-        for (j = 0; j < N; j++) {
+        for (int j = 0; j < N; j++) {
             double err = fabs(pt0[j].x * lines[1][j].x + pt0[j].y * lines[1][j].y + lines[1][j].z) +
                          fabs(pt1[j].x * lines[0][j].x + pt1[j].y * lines[0][j].y + lines[0][j].z);
             avgErr += err;
@@ -199,44 +207,47 @@ static void StereoCalib(const char *imageList, int nx, int ny, bool useUncalibra
     }
     std::cout << "avg err = " << avgErr / (nframes * N) << std::endl;
 
-    // COMPUTE AND DISPLAY RECTIFICATION
-    //
+    // 4 立体矫正
+    // 计算校正后的结果和视差图
+    // 是否需要计算未畸变的结果
+    bool showUndistorted = true;
+    // 立体相机系统的两个摄像机是否是垂直排列的
+    bool isVerticalStereo = false;
     if (showUndistorted) {
+        // 校正矩阵R1、R2，立体相机校正内参矩阵P1、P2，校正后的映射矩阵map11, map12, map21, map22
         cv::Mat R1, R2, P1, P2, map11, map12, map21, map22;
-
         if (!useUncalibrated) {
-            // IF BY CALIBRATED (BOUGUET'S METHOD)
+            // 使用经过标定的数据计算立体系统校正参数（BOUGUET的算法）
+            // 校正立体系统
             stereoRectify(M1, D1, M2, D2, imageSize, R, T, R1, R2, P1, P2, cv::noArray(), 0);
             isVerticalStereo = fabs(P2.at<double>(1, 3)) > fabs(P2.at<double>(0, 3));
-            // Precompute maps for cvRemap()
+            // 计算校正映射表
             initUndistortRectifyMap(M1, D1, R1, P1, imageSize, CV_16SC2, map11, map12);
             initUndistortRectifyMap(M2, D2, R2, P2, imageSize, CV_16SC2, map21, map22);
         } else {
-            // OR ELSE HARTLEY'S METHOD
-            // use intrinsic parameters of each camera, but
-            // compute the rectification transformation directly
-            // from the fundamental matrix
+            // 使用未经过标定的数据计算立体系统校正参数（HARTLEY的算法）
+            // 使用相机自身的内参矩阵，直接使用基础矩阵计算单应矩阵，从而计算出校正矩阵
             std::vector<cv::Point2f> allpoints[2];
-            for (i = 0; i < nframes; i++) {
+            // 将左右图像的所有帧数据全部集中在一起，从而计算单应矩阵
+            for (int i = 0; i < nframes; i++) {
                 copy(points[0][i].begin(), points[0][i].end(), back_inserter(allpoints[0]));
                 copy(points[1][i].begin(), points[1][i].end(), back_inserter(allpoints[1]));
             }
+            // 计算基础矩阵
             cv::Mat F = findFundamentalMat(allpoints[0], allpoints[1], cv::FM_8POINT);
             cv::Mat H1, H2;
-            cv::stereoRectifyUncalibrated(allpoints[0], allpoints[1], F, imageSize,
-                                          H1, H2, 3);
+            // 计算单应矩阵
+            cv::stereoRectifyUncalibrated(allpoints[0], allpoints[1], F, imageSize, H1, H2, 3);
+            // 计算矫正矩阵
             R1 = M1.inv() * H1 * M1;
             R2 = M2.inv() * H2 * M2;
-
-            // Precompute map for cvRemap()
-            cv::initUndistortRectifyMap(M1, D1, R1, P1, imageSize, CV_16SC2, map11,
-                                        map12);
-            cv::initUndistortRectifyMap(M2, D2, R2, P2, imageSize, CV_16SC2, map21,
-                                        map22);
+            // 计算校正映射表
+            cv::initUndistortRectifyMap(M1, D1, R1, P1, imageSize, CV_16SC2, map11, map12);
+            cv::initUndistortRectifyMap(M2, D2, R2, P2, imageSize, CV_16SC2, map21, map22);
         }
 
-        // RECTIFY THE IMAGES AND FIND DISPARITY MAPS
-        //
+        // 校正图像并计算视差图
+        // 准备一个新的图像能够装下两个相机独立采集数据的立体校正结果，从而形象的演示立体校正后的行对齐现象
         cv::Mat pair;
         if (!isVerticalStereo) {
             pair.create(imageSize.height, imageSize.width * 2, CV_8UC3);
@@ -244,48 +255,62 @@ static void StereoCalib(const char *imageList, int nx, int ny, bool useUncalibra
             pair.create(imageSize.height * 2, imageSize.width, CV_8UC3);
         }
 
-        // Setup for finding stereo corrrespondences
+        // 定义半全局匹配算法视差计算功能类实例
         cv::Ptr<cv::StereoSGBM> stereo = cv::StereoSGBM::create(-64, 128, 11, 100, 1000, 32, 0, 15, 1000, 16, cv::StereoSGBM::MODE_HH);
-
-        for (i = 0; i < nframes; i++) {
+        for (int i = 0; i < nframes; i++) {
+            // 读取原始图像
             cv::Mat img1 = cv::imread(imageNames[0][i].c_str(), 0);
             cv::Mat img2 = cv::imread(imageNames[1][i].c_str(), 0);
-            cv::Mat img1r, img2r, disp, vdisp;
             if (img1.empty() || img2.empty()) {
+                // 读取失败时处理下一组图像对
                 continue;
             }
+            
+            // 计算立体矫正后的图像
+            cv::Mat img1r, img2r, disp, vdisp;
             cv::remap(img1, img1r, map11, map12, cv::INTER_LINEAR);
             cv::remap(img2, img2r, map21, map22, cv::INTER_LINEAR);
+            
+            // 5 视差图计算
+            // 只在水平排列的相机系统中，或者使用已经标定好的相机进行立体校正的情况(非Hartley算法)，才计算深度图
             if (!isVerticalStereo || !useUncalibrated) {
-                // When the stereo camera is oriented vertically,
-                // Hartley method does not transpose the
-                // image, so the epipolar lines in the rectified
-                // images are vertical. Stereo correspondence
-                // function does not support such a case.
+                // 对于垂直排列的相机系统，Hartley不会对对图像应用转置处理，因此在校正后的图像内部极线是垂直的。
+                // 立体匹配函数无法处理这种场景
                 stereo->compute(img1r, img2r, disp);
                 cv::normalize(disp, vdisp, 0, 256, cv::NORM_MINMAX, CV_8U);
                 cv::imshow("disparity", vdisp);
             }
+            
             if (!isVerticalStereo) {
+                // 水平情况下，沿着水平方向绘制扫描线
+                // 绘制第一张图像
                 cv::Mat part = pair.colRange(0, imageSize.width);
                 cvtColor(img1r, part, cv::COLOR_GRAY2BGR);
+                // 绘制第二张图像
                 part = pair.colRange(imageSize.width, imageSize.width * 2);
                 cvtColor(img2r, part, cv::COLOR_GRAY2BGR);
-                for (j = 0; j < imageSize.height; j += 16) {
+                // 绘制水平扫描线
+                for (int j = 0; j < imageSize.height; j += 16) {
                     cv::line(pair, cv::Point(0, j), cv::Point(imageSize.width * 2, j),
                              cv::Scalar(0, 255, 0));
                 }
             } else {
+                // 垂直情况下，沿着垂直方向绘制扫描线
+                // 绘制第一张图像
                 cv::Mat part = pair.rowRange(0, imageSize.height);
                 cv::cvtColor(img1r, part, cv::COLOR_GRAY2BGR);
+                // 绘制第二张图像
                 part = pair.rowRange(imageSize.height, imageSize.height * 2);
                 cv::cvtColor(img2r, part, cv::COLOR_GRAY2BGR);
-                for (j = 0; j < imageSize.width; j += 16) {
-                    line(pair, cv::Point(j, 0), cv::Point(j, imageSize.height * 2),
-                         cv::Scalar(0, 255, 0));
+                // 绘制垂直扫描线
+                for (int j = 0; j < imageSize.width; j += 16) {
+                    cv::line(pair, cv::Point(j, 0), cv::Point(j, imageSize.height * 2),
+                             cv::Scalar(0, 255, 0));
                 }
             }
+            // 显示立体校正后的图像对
             cv::imshow("rectified", pair);
+            // 阻塞当前线程，等待用户输入事件
             if ((cv::waitKey() & 255) == 27) {
                 break;
             }
@@ -296,48 +321,14 @@ static void StereoCalib(const char *imageList, int nx, int ny, bool useUncalibra
 
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    help(argv);
+    int board_w = 9, board_h = 6;
+    const char *board_list = "../stereoData/stereoData_list.txt";
+    if (argc == 4) {
+        board_list = argv[1];
+        board_w = atoi(argv[2]);
+        board_h = atoi(argv[3]);
+    }
+    StereoCalib(board_list, board_w, board_h, true);
     return 0;
 }
-
-
-
-/*
- // Example 19-3. Stereo calibration, rectification, and correspondence
- #pragma warning(disable : 4996)
- #include <opencv2/opencv.hpp>
- #include <iostream>
- #include <string.h>
- #include <stdlib.h>
- #include <stdio.h>
-
- using namespace std;
-
-
-
- //
- //Default Call (with parameters: board_w = 9, board_h = 6, list =
- //  ../stereoData_19-03_list.txt):
- //./example_19-03
- //
- //Manual call:
- //./example_19-03 [<board_w> <board_h> <path/list_of_stereo_pairs>]
- //
- // Press any key to step through results, ESC to exit
- //
-
-
- int main(int argc, char **argv) {
-   help(argv);
-   int board_w = 9, board_h = 6;
-   const char *board_list = "../stereoData/example_19-03_list.txt";
-   if (argc == 4) {
-     board_list = argv[1];
-     board_w = atoi(argv[2]);
-     board_h = atoi(argv[3]);
-   }
-   StereoCalib(board_list, board_w, board_h, true);
-   return 0;
- }
- */
