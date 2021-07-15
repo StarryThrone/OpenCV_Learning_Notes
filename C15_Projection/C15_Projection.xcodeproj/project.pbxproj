@@ -18,6 +18,13 @@
 		5599D9C3269ECCFF00218012 /* libopencv_imgcodecs.4.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F564E75D25ECDAF7000E72CD /* libopencv_imgcodecs.4.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5599D9C4269ECCFF00218012 /* libopencv_imgproc.4.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F564E76325ECDB5F000E72CD /* libopencv_imgproc.4.5.1.dylib */; };
 		5599D9C5269ECCFF00218012 /* libopencv_imgproc.4.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F564E76325ECDB5F000E72CD /* libopencv_imgproc.4.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5599DA4C269FD40200218012 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5599DA4B269FD40200218012 /* main.cpp */; };
+		5599DA50269FDF6D00218012 /* libopencv_core.4.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F564E75925ECDACB000E72CD /* libopencv_core.4.5.1.dylib */; };
+		5599DA51269FDF6D00218012 /* libopencv_core.4.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F564E75925ECDACB000E72CD /* libopencv_core.4.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5599DA52269FDF6D00218012 /* libopencv_imgproc.4.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F564E76325ECDB5F000E72CD /* libopencv_imgproc.4.5.1.dylib */; };
+		5599DA53269FDF6D00218012 /* libopencv_imgproc.4.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F564E76325ECDB5F000E72CD /* libopencv_imgproc.4.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5599DA55269FDFA000218012 /* libopencv_highgui.4.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F564E76625ECDB82000E72CD /* libopencv_highgui.4.5.1.dylib */; };
+		5599DA56269FDFA000218012 /* libopencv_highgui.4.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F564E76625ECDB82000E72CD /* libopencv_highgui.4.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F52B87D82675DCB40065507A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F52B87D72675DCB40065507A /* main.cpp */; };
 		F52B87DD2675DD150065507A /* libopencv_calib3d.4.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F564E76025ECDB27000E72CD /* libopencv_calib3d.4.5.1.dylib */; };
 		F52B87DE2675DD150065507A /* libopencv_calib3d.4.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F564E76025ECDB27000E72CD /* libopencv_calib3d.4.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -63,6 +70,28 @@
 				5599D9C5269ECCFF00218012 /* libopencv_imgproc.4.5.1.dylib in Embed Libraries */,
 				5599D9C1269ECCFF00218012 /* libopencv_highgui.4.5.1.dylib in Embed Libraries */,
 				5599D9BD269ECCFF00218012 /* libopencv_calib3d.4.5.1.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5599DA47269FD40200218012 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		5599DA54269FDF6D00218012 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5599DA51269FDF6D00218012 /* libopencv_core.4.5.1.dylib in Embed Libraries */,
+				5599DA56269FDFA000218012 /* libopencv_highgui.4.5.1.dylib in Embed Libraries */,
+				5599DA53269FDF6D00218012 /* libopencv_imgproc.4.5.1.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,6 +149,8 @@
 /* Begin PBXFileReference section */
 		5599D9AA269D31D800218012 /* Comprehensive */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Comprehensive; sourceTree = BUILT_PRODUCTS_DIR; };
 		5599D9AC269D31D900218012 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		5599DA49269FD40200218012 /* LineFitting */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LineFitting; sourceTree = BUILT_PRODUCTS_DIR; };
+		5599DA4B269FD40200218012 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F52B87D52675DCB40065507A /* FundamentalMatrix */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FundamentalMatrix; sourceTree = BUILT_PRODUCTS_DIR; };
 		F52B87D72675DCB40065507A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F52B87E62675DD150065507A /* libopencv_videoio.4.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videoio.4.2.0.dylib; path = ../Frameworks/libopencv_videoio.4.2.0.dylib; sourceTree = "<group>"; };
@@ -142,6 +173,16 @@
 				5599D9C4269ECCFF00218012 /* libopencv_imgproc.4.5.1.dylib in Frameworks */,
 				5599D9C0269ECCFF00218012 /* libopencv_highgui.4.5.1.dylib in Frameworks */,
 				5599D9BC269ECCFF00218012 /* libopencv_calib3d.4.5.1.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5599DA46269FD40200218012 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5599DA50269FDF6D00218012 /* libopencv_core.4.5.1.dylib in Frameworks */,
+				5599DA55269FDFA000218012 /* libopencv_highgui.4.5.1.dylib in Frameworks */,
+				5599DA52269FDF6D00218012 /* libopencv_imgproc.4.5.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +221,14 @@
 			path = Comprehensive;
 			sourceTree = "<group>";
 		};
+		5599DA4A269FD40200218012 /* LineFitting */ = {
+			isa = PBXGroup;
+			children = (
+				5599DA4B269FD40200218012 /* main.cpp */,
+			);
+			path = LineFitting;
+			sourceTree = "<group>";
+		};
 		F52B87D62675DCB40065507A /* FundamentalMatrix */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +256,7 @@
 				F5723AE625DA66A400D824E9 /* BirdEyeView */,
 				F52B87D62675DCB40065507A /* FundamentalMatrix */,
 				5599D9AB269D31D900218012 /* Comprehensive */,
+				5599DA4A269FD40200218012 /* LineFitting */,
 				F5723AD725DA666600D824E9 /* Products */,
 				F564E75825ECDACB000E72CD /* Frameworks */,
 			);
@@ -218,6 +268,7 @@
 				F5723AE525DA66A400D824E9 /* BirdEyeView */,
 				F52B87D52675DCB40065507A /* FundamentalMatrix */,
 				5599D9AA269D31D800218012 /* Comprehensive */,
+				5599DA49269FD40200218012 /* LineFitting */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -249,6 +300,24 @@
 			name = Comprehensive;
 			productName = Comprehensive;
 			productReference = 5599D9AA269D31D800218012 /* Comprehensive */;
+			productType = "com.apple.product-type.tool";
+		};
+		5599DA48269FD40200218012 /* LineFitting */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5599DA4F269FD40200218012 /* Build configuration list for PBXNativeTarget "LineFitting" */;
+			buildPhases = (
+				5599DA54269FDF6D00218012 /* Embed Libraries */,
+				5599DA45269FD40200218012 /* Sources */,
+				5599DA46269FD40200218012 /* Frameworks */,
+				5599DA47269FD40200218012 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LineFitting;
+			productName = LineFitting;
+			productReference = 5599DA49269FD40200218012 /* LineFitting */;
 			productType = "com.apple.product-type.tool";
 		};
 		F52B87D42675DCB40065507A /* FundamentalMatrix */ = {
@@ -298,6 +367,9 @@
 					5599D9A9269D31D800218012 = {
 						CreatedOnToolsVersion = 12.5;
 					};
+					5599DA48269FD40200218012 = {
+						CreatedOnToolsVersion = 12.5;
+					};
 					F52B87D42675DCB40065507A = {
 						CreatedOnToolsVersion = 12.3;
 					};
@@ -322,6 +394,7 @@
 				F5723AE425DA66A400D824E9 /* BirdEyeView */,
 				F52B87D42675DCB40065507A /* FundamentalMatrix */,
 				5599D9A9269D31D800218012 /* Comprehensive */,
+				5599DA48269FD40200218012 /* LineFitting */,
 			);
 		};
 /* End PBXProject section */
@@ -332,6 +405,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5599D9AD269D31D900218012 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5599DA45269FD40200218012 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5599DA4C269FD40200218012 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +450,24 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		5599DA4D269FD40200218012 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		5599DA4E269FD40200218012 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -531,6 +630,15 @@
 			buildConfigurations = (
 				5599D9AE269D31D900218012 /* Debug */,
 				5599D9AF269D31D900218012 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5599DA4F269FD40200218012 /* Build configuration list for PBXNativeTarget "LineFitting" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5599DA4D269FD40200218012 /* Debug */,
+				5599DA4E269FD40200218012 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
