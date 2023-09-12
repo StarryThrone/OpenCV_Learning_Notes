@@ -52,7 +52,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "/Users/chenjie/Desktop/GitHubRep/OpenCV3/Resources/fruits.jpg"
+            argument = "/Users/bytedance/Desktop/Develop/Pvate/OpenCV_Learning_Notes/Resources/fruits.jpg"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
